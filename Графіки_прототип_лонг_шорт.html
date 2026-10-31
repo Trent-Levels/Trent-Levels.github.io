@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<title>Свеча — графики рынков</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23f5b94a'/%3E%3Cpath d='M11 6v20M21 8v18' stroke='%231a1204' stroke-width='2' stroke-linecap='round'/%3E%3Crect x='8' y='12' width='6' height='9' rx='1.5' fill='%231a1204'/%3E%3Crect x='18' y='11' width='6' height='8' rx='1.5' fill='none' stroke='%231a1204' stroke-width='2'/%3E%3C/svg%3E">
+<style>
+:root{--bg:#f4f2ec;--card:#fff;--panel:#faf9f5;--text:#14171f;--muted:#6f7683;--border:#e5e1d6;--grid:#efece4;--up:#0f9d6e;--down:#e5384f;--accent:#e8a020;--on:#1a1204;--shadow:0 10px 30px rgba(40,30,10,.08);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root[data-theme="dark"]{--bg:#0a0d12;--card:#10151d;--panel:#151b25;--text:#e8ebf0;--muted:#7d8795;--border:#1e2631;--grid:#171e29;--up:#2ebd85;--down:#f6465d;--accent:#f5b94a;--shadow:0 10px 30px rgba(0,0,0,.45)}
+html,body{height:100%}
+*{box-sizing:border-box}
+body{margin:0;color:var(--text);font:14px/1.45 Manrope,-apple-system,"Segoe UI",Roboto,sans-serif;font-variant-numeric:tabular-nums;display:flex;flex-direction:column;background:radial-gradient(900px 380px at 88% -8%,rgba(245,185,74,.13),transparent 60%),radial-gradient(700px 320px at -5% 105%,rgba(46,189,133,.07),transparent 60%),var(--bg)}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 20px 6px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:11px}
+.brand svg{display:block;filter:drop-shadow(0 4px 10px rgba(240,138,36,.35))}
+.logo{font-weight:800;font-size:21px;letter-spacing:-.02em;line-height:1}
+.tag{font-size:11px;color:var(--muted);margin-top:3px;letter-spacing:.04em}
+.hr{display:flex;align-items:center;gap:8px}
+.bar{display:flex;align-items:center;gap:10px;padding:8px 20px 10px;flex-wrap:wrap}
+button{font:inherit;font-weight:600;color:var(--text);background:var(--card);border:1px solid var(--border);border-radius:10px;padding:7px 13px;cursor:pointer;transition:.15s}
+button:hover{border-color:var(--accent);transform:translateY(-1px)}
+button:active{transform:none}
+button.on{background:var(--accent);border-color:var(--accent);color:var(--on)}
+.sp{flex:1}
+.badge{font-size:12px;color:var(--muted)}
+#tfs{display:inline-flex;gap:2px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:3px}
+#tfs button{border:0;background:transparent;border-radius:9px;padding:6px 11px;color:var(--muted);margin:0!important}
+#tfs button:hover{color:var(--text);transform:none}
+#tfs button.on{background:var(--accent);color:var(--on)}
+#star{font-size:16px;line-height:1;padding:7px 10px;color:var(--accent)}
+.bar select{font:inherit;font-weight:700;color:var(--text);background:var(--card);border:1px solid var(--border);border-radius:10px;padding:8px 12px;outline:0;cursor:pointer}
+.bar select:focus{border-color:var(--accent)}
+.wbtn{font-weight:700;border-radius:999px;padding:8px 15px}
+#wbtn{background:var(--accent);border-color:var(--accent);color:var(--on)}
+#wbtn:hover{filter:brightness(1.07)}
+#tbtn{color:var(--muted)}
+.gbtn{display:flex;align-items:center;gap:10px;background:#fff;color:#3c4043;border:1px solid #dadce0;border-radius:999px;padding:7px 14px;font-weight:600}
+.gbtn:hover{box-shadow:0 2px 8px rgba(0,0,0,.2);border-color:#dadce0}
+.me{position:relative}
+.ava{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#ffd27a,#f08a24);color:var(--on);font-weight:800;display:flex;align-items:center;justify-content:center;cursor:pointer;border:0;padding:0;overflow:hidden}
+.ava img{width:100%;height:100%;object-fit:cover}
+.menu{position:absolute;right:0;top:44px;min-width:220px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px;box-shadow:var(--shadow);z-index:20}
+.menu .nm{font-weight:700}
+.menu .em{color:var(--muted);font-size:12px;margin-bottom:10px}
+.menu button{width:100%}
+.ov{position:fixed;inset:0;background:rgba(5,8,12,.62);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;z-index:50;padding:16px}
+.dlg{background:#fff;color:#202124;border-radius:18px;width:100%;max-width:400px;padding:24px 0 16px;box-shadow:0 20px 60px rgba(0,0,0,.45)}
+.dlg h3{margin:0 24px 4px;font-weight:700;font-size:22px;text-align:center}
+.dlg p{margin:0 24px 16px;text-align:center;color:#5f6368;font-size:14px}
+.acc{display:flex;align-items:center;gap:12px;width:100%;border:0;border-top:1px solid #e8eaed;border-radius:0;padding:12px 24px;text-align:left;background:#fff;color:#202124;transform:none!important}
+.acc:hover{background:#f6f7f8}
+.acc .ci{width:34px;height:34px;border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;flex:none}
+.acc small{display:block;color:#5f6368;font-weight:500}
+main{flex:1;display:flex;min-height:0;gap:14px;padding:0 20px 20px}
+#chart{flex:1;min-width:0;min-height:300px;border:1px solid var(--border);border-radius:18px;overflow:hidden;background:var(--card);box-shadow:var(--shadow)}
+aside{width:180px;background:var(--card);border:1px solid var(--border);border-radius:18px;padding:14px;overflow:auto;box-shadow:var(--shadow)}
+aside h4{margin:0 0 10px;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
+aside button{display:block;width:100%;text-align:left;margin-bottom:6px;background:var(--panel);font-size:13px}
+@media (max-width:640px){header{padding:12px 14px 4px}.bar{padding:6px 14px 8px}main{flex-direction:column;padding:0 14px 14px}aside{width:auto;max-height:130px}.tag{display:none}#tbtn{padding:8px 11px}}
+.wdlg{background:var(--card);color:var(--text);border:1px solid var(--border);border-radius:20px;width:100%;max-width:420px;max-height:92vh;overflow:auto;padding:20px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.wdlg label{display:block;font-size:12px;color:var(--muted);font-weight:600}
+.wdlg input,.wdlg select{width:100%;font:inherit;color:var(--text);background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:10px 12px;margin:4px 0 12px;outline:0}
+.wdlg input:focus{border-color:var(--accent)}
+.wtabs{display:flex;gap:4px;margin-bottom:14px;background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:3px}
+.wtabs button{flex:1;border:0;background:transparent;color:var(--muted)}
+.wtabs button.on{background:var(--accent);color:var(--on)}
+.wbal{margin-bottom:14px;color:var(--muted)}
+.wbal b{display:block;color:var(--text);font-size:30px;font-weight:800;letter-spacing:-.02em}
+.wq{display:flex;gap:6px;flex-wrap:wrap;margin:-4px 0 12px}
+.wq button{padding:5px 11px;font-size:13px;background:var(--panel)}
+.wsum{font-size:13px;color:var(--muted);margin-bottom:8px}
+.werr{color:var(--down);min-height:18px;font-size:13px}
+.wok{color:var(--up);min-height:18px;font-size:13px}
+.wgo{width:100%;background:var(--accent);border-color:var(--accent);color:var(--on);font-weight:700;padding:11px;margin-top:4px;border-radius:12px}
+.wx{width:100%;margin-top:6px;border-radius:12px;background:transparent}
+.wnote{font-size:11px;color:var(--muted);margin:10px 0 0}
+.whist{border-top:1px solid var(--border);margin-top:14px;padding-top:8px}
+.wrow{display:flex;justify-content:space-between;gap:8px;padding:7px 0;font-size:13px;font-weight:600}
+.wrow small{display:block;color:var(--muted);font-size:11px;font-weight:500}
+.wrow>span:last-child{text-align:right}
+.pos{color:var(--up)}
+.neg{color:var(--down)}
+.wcardbox span{user-select:all;-webkit-user-select:all}
+.wcardbox{display:flex;align-items:center;justify-content:space-between;gap:8px;background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:10px 12px;margin:4px 0 8px;font-size:17px;font-weight:700;letter-spacing:1px}
+#side{width:236px;display:flex;flex-direction:column;gap:14px;min-height:0;overflow:auto}
+#side aside{width:auto;flex:none;min-height:80px}
+.trade{flex:none;background:var(--card);border:1px solid var(--border);border-radius:18px;padding:14px;box-shadow:var(--shadow)}
+.trade h4{margin:0 0 10px;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
+.trade label{display:block;font-size:12px;color:var(--muted);font-weight:600}
+.trade input{width:100%;font:inherit;font-weight:700;color:var(--text);background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:9px 11px;margin:4px 0 8px;outline:0}
+.trade input:focus{border-color:var(--accent)}
+.tpx{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;font-weight:700}
+.tpx b{font-size:22px;letter-spacing:-.02em}
+.tq,.tx{display:flex;gap:5px;flex-wrap:wrap;margin:0 0 10px}
+.tq button,.tx button{padding:4px 9px;font-size:12px;background:var(--panel)}
+.tx button.on{background:var(--accent);border-color:var(--accent);color:var(--on)}
+.tpay{font-size:12px;color:var(--muted);margin-bottom:10px}
+.tpay b{color:var(--up)}
+.tgo{display:flex;gap:8px}
+.tgo button{flex:1;padding:11px 6px;border-radius:12px;font-weight:800;color:#fff}
+.tgo .long{background:var(--up);border-color:var(--up)}
+.tgo .short{background:var(--down);border-color:var(--down)}
+.terr{min-height:18px;margin-top:6px;font-size:12px;color:var(--down)}
+.terr.ok{color:var(--up)}
+.topen{margin-top:4px;border-top:1px solid var(--border);padding-top:6px}
+.topen:empty{display:none}
+.topen .wrow{font-size:12px}
+@media (max-width:640px){main{flex:none}#chart{flex:none;height:60vh;min-height:300px}#side{width:auto;overflow:visible}#side aside{max-height:130px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand"><svg width="34" height="34" viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd27a"/><stop offset="1" stop-color="#f08a24"/></linearGradient></defs><rect width="32" height="32" rx="9" fill="url(#lg)"/><path d="M11 6v20M21 8v18" stroke="#1a1204" stroke-width="2" stroke-linecap="round"/><rect x="8" y="12" width="6" height="9" rx="1.5" fill="#1a1204"/><rect x="18" y="11" width="6" height="8" rx="1.5" fill="none" stroke="#1a1204" stroke-width="2"/></svg><div><div class="logo">Свеча</div><div class="tag">РЫНКИ · 24/7</div></div></div>
+  <div class="hr"><button id="tbtn" class="wbtn" title="Сменить тему"></button><button id="wbtn" class="wbtn" title="Кошелёк: пополнение и вывод"></button><div id="auth"></div></div>
+</header>
+<div class="bar">
+  <span id="syms"></span><span class="sp"></span>
+  <span id="tfs"></span>
+  <button id="star" title="Добавить в избранное">☆</button>
+  <span class="badge" id="badge"></span>
+</div>
+<main>
+  <div id="chart"></div>
+  <div id="side">
+    <section class="trade">
+      <h4>Сделка</h4>
+      <div class="tpx"><span id="tsym"></span><b id="tpx">—</b></div>
+      <label for="tamt">Сумма, ₽</label><input id="tamt" inputmode="decimal" value="100" autocomplete="off">
+      <div class="tq"><button data-ta="100">100</button><button data-ta="500">500</button><button data-ta="1000">1000</button><button data-ta="all">Всё</button></div>
+      <label>Время сделки</label><div class="tx" id="ttimes"></div>
+      <div class="tpay" id="tpay"></div>
+      <div class="tgo"><button class="long" id="tlong">▲ Лонг</button><button class="short" id="tshort">▼ Шорт</button></div>
+      <div class="terr" id="terr"></div>
+      <div class="topen" id="topen"></div>
+    </section>
+    <aside><h4>Избранное</h4><div id="favs"></div></aside>
+  </div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/lightweight-charts@4.1.3/dist/lightweight-charts.standalone.production.js"></script>
+<script>
+// Вставьте сюда Client ID из Google Cloud Console, чтобы включить настоящий вход через Google.
+const GOOGLE_CLIENT_ID = "";
+let CRYPTO = ["BTCUSDT","ETHUSDT","SOLUSDT","BNBUSDT","XRPUSDT","DOGEUSDT","ADAUSDT","AVAXUSDT","LINKUSDT","TONUSDT","TRXUSDT","DOTUSDT","LTCUSDT","SUIUSDT","NEARUSDT","STRKUSDT",
+  "BCHUSDT","ATOMUSDT","UNIUSDT","AAVEUSDT","APTUSDT","ARBUSDT","OPUSDT","INJUSDT","FILUSDT","ETCUSDT","XLMUSDT","HBARUSDT","ICPUSDT","PEPEUSDT","SHIBUSDT","WIFUSDT","TAOUSDT","SEIUSDT","TIAUSDT","RENDERUSDT","FETUSDT","ONDOUSDT","ENAUSDT","JUPUSDT","ALGOUSDT","MKRUSDT","LDOUSDT","CRVUSDT","RUNEUSDT","IMXUSDT","GALAUSDT","SANDUSDT","MANAUSDT","BONKUSDT"];
+// Акции, ETF и металлы на Binance торгуются как бессрочные TradFi-контракты на фьючерсном рынке.
+// Список проверяется через exchangeInfo при старте: тикеры, которых нет на бирже, скрываются.
+let STOCKS = ["TSLAUSDT","NVDAUSDT","AAPLUSDT","AMZNUSDT","COINUSDT","MSTRUSDT","GOOGLUSDT","METAUSDT","MSFTUSDT","AMDUSDT","PLTRUSDT","HOODUSDT","CRCLUSDT","INTCUSDT","MRVLUSDT","CRWVUSDT","WMTUSDT","JPMUSDT","XAUUSDT","XAGUSDT"];
+let SYMS = CRYPTO.concat(STOCKS);
+const isFut = s => STOCKS.includes(s);
+const BARS = 3000; // сколько свечей истории загружать на каждом таймфрейме
+const TFS = ["1m","5m","15m","1h","4h","1d","1w"];
+const STEP = {"1m":60,"5m":300,"15m":900,"1h":3600,"4h":14400,"1d":86400,"1w":604800};
+const BASE = {BTCUSDT:68000,ETHUSDT:3400,SOLUSDT:170,STRKUSDT:0.45,BNBUSDT:600,XRPUSDT:2.2,DOGEUSDT:0.2,ADAUSDT:0.7,AVAXUSDT:35,LINKUSDT:15,TONUSDT:3,TRXUSDT:0.25,DOTUSDT:5,LTCUSDT:90,SUIUSDT:3,NEARUSDT:3,TSLAUSDT:300,NVDAUSDT:180,AAPLUSDT:230,AMZNUSDT:220,COINUSDT:300,MSTRUSDT:300,XAUUSDT:4000,XAGUSDT:50,GOOGLUSDT:250,METAUSDT:700,MSFTUSDT:500,AMDUSDT:200,PLTRUSDT:150,HOODUSDT:100,CRCLUSDT:150,INTCUSDT:30,MRVLUSDT:80,CRWVUSDT:100,WMTUSDT:100,JPMUSDT:300};
+let demoMode = false, sym = "BTCUSDT", tf = "1h", ws = null, favs = [], user = null, seq = 0;
+
+function store(k, v){ try{ if(v===undefined){ return JSON.parse(localStorage.getItem(k)); } localStorage.setItem(k, JSON.stringify(v)); }catch(e){ return null; } }
+favs = store("favs") || [];
+user = store("user");
+document.documentElement.dataset.theme = store("theme") === "light" ? "light" : "dark"; // по умолчанию тёмная
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+
+const chart = LightweightCharts.createChart(document.getElementById("chart"), {
+  autoSize: true,
+  timeScale: { timeVisible: true, secondsVisible: false, rightOffset: 5, barSpacing: 9, minBarSpacing: 0.2 },
+  rightPriceScale: { scaleMargins: { top: 0.08, bottom: 0.25 } }
+});
+const candles = chart.addCandlestickSeries({ borderVisible: false });
+const vol = chart.addHistogramSeries({ priceFormat: { type: "volume" }, priceScaleId: "" });
+vol.priceScale().applyOptions({ scaleMargins: { top: 0.8, bottom: 0 } });
+
+function theme(){
+  chart.applyOptions({
+    layout: { background: { color: css("--card") }, textColor: css("--muted"), fontFamily: "Manrope, sans-serif" },
+    grid: { vertLines: { color: css("--grid") }, horzLines: { color: css("--grid") } },
+    rightPriceScale: { borderColor: css("--border") },
+    timeScale: { borderColor: css("--border") }
+  });
+  candles.applyOptions({ upColor: css("--up"), downColor: css("--down"), wickUpColor: css("--up"), wickDownColor: css("--down") });
+}
+function themeBtn(){
+  const dark = document.documentElement.dataset.theme !== "light";
+  document.getElementById("tbtn").textContent = dark ? "☀️ Светлая" : "🌙 Тёмная";
+}
+document.getElementById("tbtn").onclick = () => {
+  const next = document.documentElement.dataset.theme === "light" ? "dark" : "light";
+  document.documentElement.dataset.theme = next; store("theme", next);
+  theme(); themeBtn();
+  if(cur.length) vol.setData(cur.map(x => ({ time:x.time, value:x.v, color:volColor(x.open, x.close) }))); // перекрасить объёмы
+};
+theme(); themeBtn();
+
+function volColor(o, c){ return (c >= o ? css("--up") : css("--down")) + "66"; }
+
+// Резервные данные (если нет связи с биржей): отдельная история на каждый таймфрейм, BARS свечей.
+const demo = {};
+let tickTimer = null;
+function rng(s){ return () => { s = (s*1664525 + 1013904223) % 4294967296; return s/4294967296; }; }
+function demoSeries(){
+  const key = sym + tf;
+  if(demo[key]) return demo[key];
+  const step = STEP[tf], amp = 0.002*Math.sqrt(step/60);
+  const r = rng(sym.split("").reduce((a, c) => a + c.charCodeAt(0)*31, 7) + step);
+  let t = Math.floor(Date.now()/1000/step)*step - (BARS-1)*step, p = BASE[sym] || 100;
+  const out = [];
+  for(let i=0;i<BARS;i++){
+    const o = p, c = o*(1 + (r()-0.5)*amp);
+    out.push({ time:t, open:o, high:Math.max(o,c)*(1+r()*amp*0.4), low:Math.min(o,c)*(1-r()*amp*0.4), close:c, v:r()*100+20 });
+    p = c; t += step;
+  }
+  const k = (BASE[sym] || 100)/out[out.length-1].close;
+  out.forEach(b => { b.open *= k; b.high *= k; b.low *= k; b.close *= k; });
+  return demo[key] = out;
+}
+function demoData(){ return demoSeries(); }
+function startDemo(){
+  const bars = demoSeries(), step = STEP[tf];
+  tickTimer = setInterval(() => {
+    const now = Math.floor(Date.now()/1000/step)*step;
+    let last = bars[bars.length-1];
+    if(now > last.time){ last = { time:now, open:last.close, high:last.close, low:last.close, close:last.close, v:0 }; bars.push(last); }
+    const c = last.close*(1 + (Math.random()-0.5)*0.0006);
+    last.close = c; prices[sym] = c; last.high = Math.max(last.high, c); last.low = Math.min(last.low, c); last.v += Math.random()*5;
+    candles.update({ time:last.time, open:last.open, high:last.high, low:last.low, close:c });
+    vol.update({ time:last.time, value:last.v, color:volColor(last.open, c) });
+  }, 700);
+}
+
+const kurl = () => isFut(sym) ? "https://fapi.binance.com/fapi/v1/klines" : "https://api.binance.com/api/v3/klines";
+const mapK = d => d.map(k => ({ time:k[0]/1000, open:+k[1], high:+k[2], low:+k[3], close:+k[4], v:+k[5] }));
+// Загружает до n свечей, заканчивающихся перед endMs (или самые новые, если endMs не задан).
+async function fetchBars(n, endMs){
+  let all = [], end = endMs || null;
+  while(all.length < n){
+    const lim = Math.min(1000, n - all.length);
+    const r = await fetch(kurl() + "?symbol=" + sym + "&interval=" + tf + "&limit=" + lim + (end ? "&endTime=" + end : ""));
+    const d = await r.json();
+    if(!Array.isArray(d) || !d.length){ if(!all.length && !endMs) throw new Error("bad"); break; }
+    all = d.concat(all);
+    end = d[0][0] - 1;
+    if(d.length < lim) break;
+  }
+  return mapK(all);
+}
+function fetchHist(){ return fetchBars(BARS); }
+
+// Подгрузка более старой истории при прокрутке влево (практически без ограничения).
+let cur = [], loadingMore = false, exhausted = false;
+async function loadMore(my){
+  if(loadingMore || exhausted || !cur.length) return;
+  loadingMore = true;
+  try{
+    const older = await fetchBars(1000, cur[0].time*1000 - 1);
+    if(my !== seq) return;
+    if(!older.length){ exhausted = true; return; }
+    const r = chart.timeScale().getVisibleLogicalRange();
+    cur = older.concat(cur);
+    candles.setData(cur.map(x => ({ time:x.time, open:x.open, high:x.high, low:x.low, close:x.close })));
+    vol.setData(cur.map(x => ({ time:x.time, value:x.v, color:volColor(x.open, x.close) })));
+    if(r) chart.timeScale().setVisibleLogicalRange({ from:r.from + older.length, to:r.to + older.length });
+    document.getElementById("badge").textContent = badgeText + " · " + cur.length + " свечей";
+  }catch(e){ exhausted = true; }
+  finally{ loadingMore = false; }
+}
+let badgeText = "";
+chart.timeScale().subscribeVisibleLogicalRangeChange(r => {
+  if(r && r.from < 50 && !demoMode) loadMore(seq);
+});
+
+function setData(rows){
+  candles.setData(rows.map(r => ({ time:r.time, open:r.open, high:r.high, low:r.low, close:r.close })));
+  vol.setData(rows.map(r => ({ time:r.time, value:r.v, color:volColor(r.open, r.close) })));
+  const n = rows.length, fit = () => chart.timeScale().setVisibleLogicalRange({ from: Math.max(0, n - 150), to: n + 5 });
+  fit(); setTimeout(fit, 150); setTimeout(fit, 600);
+}
+
+async function load(){
+  const my = ++seq; clearInterval(tickTimer);
+  if(ws){ try{ ws.close(); }catch(e){} ws = null; }
+  let live = false, rows; cur = []; exhausted = false; loadingMore = false; demoMode = false;
+  try{
+    rows = await fetchHist();
+    live = true;
+  }catch(e){ rows = demoData(); demoMode = true; }
+  if(my !== seq) return;
+  cur = rows.slice(); setData(rows); prices[sym] = rows[rows.length-1].close; lines(); if(!live) startDemo();
+  badgeText = "● Live · Binance" + (isFut(sym) ? " Futures" : "");
+  document.getElementById("badge").textContent = live ? badgeText + " · " + rows.length + " свечей" : "";
+  if(live){
+    try{
+      ws = new WebSocket((isFut(sym) ? "wss://fstream.binance.com/ws/" : "wss://stream.binance.com:9443/ws/")+sym.toLowerCase()+"@kline_"+tf);
+      ws.onmessage = e => {
+        const k = JSON.parse(e.data).k, o = +k.o, c = +k.c; prices[k.s || sym] = c;
+        candles.update({ time:k.t/1000, open:o, high:+k.h, low:+k.l, close:c });
+        vol.update({ time:k.t/1000, value:+k.v, color:volColor(o, c) });
+      };
+    }catch(e){}
+  }
+}
+
+function btns(id, list, cur, fn){
+  const box = document.getElementById(id);
+  box.innerHTML = "";
+  list.forEach(x => {
+    const b = document.createElement("button");
+    b.textContent = x; b.className = x === cur ? "on" : "";
+    
+    b.onclick = () => fn(x);
+    box.appendChild(b);
+  });
+}
+function render(){
+  const sb = document.getElementById("syms"); sb.innerHTML = "";
+  const sel = document.createElement("select");
+  [["Крипто", CRYPTO], ["Акции и золото", STOCKS]].forEach(g => {
+    const og = document.createElement("optgroup"); og.label = g[0];
+    g[1].forEach(s => { const o = document.createElement("option"); o.value = s; o.textContent = s.replace("USDT", "/USDT"); if(s === sym) o.selected = true; og.appendChild(o); });
+    sel.appendChild(og);
+  });
+  sel.onchange = () => { sym = sel.value; render(); load(); };
+  sb.appendChild(sel);
+  btns("tfs", TFS, tf, x => { tf = x; render(); load(); });
+  document.getElementById("star").textContent = favs.includes(sym) ? "★" : "☆";
+  tradeUI();
+  const f = document.getElementById("favs");
+  f.innerHTML = favs.length ? "" : "<span class=\"badge\">Нажмите ☆, чтобы добавить</span>";
+  favs.forEach(s => {
+    const b = document.createElement("button");
+    b.textContent = s;
+    b.onclick = () => { sym = s; render(); load(); };
+    f.appendChild(b);
+  });
+}
+document.getElementById("star").onclick = () => {
+  favs = favs.includes(sym) ? favs.filter(x => x !== sym) : favs.concat(sym);
+  store("favs", favs); render();
+};
+
+const G = '<svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.8 7.2l7.5 5.8c4.4-4.1 7.1-10.1 7.1-17.5z"/><path fill="#FBBC05" d="M10.5 28.7A14.5 14.5 0 0 1 9.5 24c0-1.6.3-3.2.8-4.7l-7.9-6.1A24 24 0 0 0 0 24c0 3.9.9 7.5 2.6 10.8l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.5-5.8c-2.1 1.4-4.9 2.3-8.4 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.9 6.1C6.5 42.6 14.6 48 24 48z"/></svg>';
+function renderAuth(){
+  const a = document.getElementById("auth");
+  a.innerHTML = "";
+  if(!user){
+    const b = document.createElement("button"); b.className = "gbtn";
+    b.innerHTML = G + "<span>Войти через Google</span>"; b.onclick = login; a.appendChild(b); return;
+  }
+  const w = document.createElement("div"); w.className = "me";
+  const av = document.createElement("button"); av.className = "ava"; av.title = user.name;
+  if(user.pic){ const i = document.createElement("img"); i.alt = ""; i.referrerPolicy = "no-referrer"; i.src = user.pic; av.appendChild(i); }
+  else av.textContent = user.name.charAt(0).toUpperCase();
+  const m = document.createElement("div"); m.className = "menu"; m.hidden = true;
+  const nm = document.createElement("div"); nm.className = "nm"; nm.textContent = user.name;
+  const em = document.createElement("div"); em.className = "em"; em.textContent = user.email || "";
+  const out = document.createElement("button"); out.textContent = "Выйти из аккаунта";
+  out.onclick = () => setUser(null);
+  m.append(nm, em, out);
+  av.onclick = e => { e.stopPropagation(); m.hidden = !m.hidden; };
+  w.append(av, m); a.appendChild(w);
+}
+document.addEventListener("click", () => { const m = document.querySelector(".menu"); if(m) m.hidden = true; });
+function setUser(u){ user = u; store("user", u); renderAuth(); loadWallet(); }
+
+function chooser(){
+  const accs = [["Иван Петренко","ivan.petrenko@gmail.com","#1a73e8"],["Рабочий аккаунт","work@example.com","#188038"],["Другой аккаунт","other@example.com","#a142f4"]];
+  const ov = document.createElement("div"); ov.className = "ov";
+  const d = document.createElement("div"); d.className = "dlg";
+  d.innerHTML = "<h3>Вход через Google</h3><p>Выберите аккаунт, чтобы продолжить</p>";
+  accs.forEach(a => {
+    const b = document.createElement("button"); b.className = "acc";
+    b.innerHTML = "<span class=\"ci\"></span><span><b></b><small></small></span>";
+    b.children[0].textContent = a[0].charAt(0); b.children[0].style.background = a[2];
+    b.querySelector("b").textContent = a[0]; b.querySelector("small").textContent = a[1];
+    b.onclick = () => { ov.remove(); setUser({ name:a[0], email:a[1], pic:"" }); };
+    d.appendChild(b);
+  });
+  ov.appendChild(d);
+  ov.onclick = e => { if(e.target === ov) ov.remove(); };
+  document.body.appendChild(ov);
+}
+function login(){
+  if(!GOOGLE_CLIENT_ID){ chooser(); return; }
+  const go = () => {
+    // Открывает настоящее окно Google со списком всех ваших аккаунтов.
+    google.accounts.oauth2.initTokenClient({ client_id: GOOGLE_CLIENT_ID, scope: "openid email profile", prompt: "select_account", callback: async t => {
+      const r = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", { headers: { Authorization: "Bearer " + t.access_token } });
+      const p = await r.json();
+      setUser({ name:p.name, email:p.email, pic:p.picture });
+    }}).requestAccessToken();
+  };
+  if(window.google && google.accounts) return go();
+  const s = document.createElement("script");
+  s.src = "https://accounts.google.com/gsi/client"; s.onload = go;
+  document.head.appendChild(s);
+}
+
+// ===== Кошелёк в рублях (данные хранятся в localStorage) =====
+const fmt = n => new Intl.NumberFormat("ru-RU", { style:"currency", currency:"RUB", minimumFractionDigits:0, maximumFractionDigits:2 }).format(n);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" }[c]));
+// >>> ЗДЕСЬ меняйте карту, на которую клиент переводит деньги при пополнении <<<
+const DEPOSIT_CARD = "2200 0000 0000 0000";
+const MIN_SUM = 100, MAX_DEP = 1000000, DEP_DELAY = 60000, WD_DELAY = 4000; // пополнение зачисляется через 1 минуту, комиссии на вывод нет
+let wallet = { bal:0, ops:[] }, wDraw = null;
+const wkey = () => "wallet:" + (user && user.email ? user.email : "guest");
+
+function renderWallet(){ document.getElementById("wbtn").textContent = "💼 " + fmt(wallet.bal); }
+// Завершает операции, у которых вышло время ожидания: пополнение зачисляется на баланс.
+function settle(w){
+  let ch = false;
+  w.ops.forEach(o => {
+    if(o.st !== "pending") return;
+    const wait = o.type === "dep" ? DEP_DELAY : WD_DELAY;
+    if(Date.now() - o.t >= wait){
+      o.st = "done"; ch = true;
+      if(o.type === "dep") w.bal = Math.round((w.bal + o.amt)*100)/100;
+    }
+  });
+  return ch;
+}
+function arm(k, op){
+  const wait = (op.type === "dep" ? DEP_DELAY : WD_DELAY) - (Date.now() - op.t);
+  setTimeout(() => {
+    const w = store(k); if(!w) return;
+    if(settle(w)) store(k, w);
+    if(k === wkey()){ wallet = w; renderWallet(); if(wDraw) wDraw(); }
+  }, Math.max(0, wait) + 50);
+}
+function loadWallet(){
+  const k = wkey();
+  wallet = store(k) || { bal:0, ops:[] };
+  wallet.trades = wallet.trades || [];
+  if(settle(wallet)) store(k, wallet);
+  wallet.ops.filter(o => o.st === "pending").forEach(o => arm(k, o));
+  renderWallet(); lines(); if(window.tradeUI) tradeUI();
+}
+function saveWallet(){ store(wkey(), wallet); renderWallet(); }
+
+function walletDlg(mode){
+  const st = { mode: mode || "dep", amt:"", card: wallet.card || "", msg:"" };
+  const ov = document.createElement("div"); ov.className = "ov";
+  const d = document.createElement("div"); d.className = "wdlg";
+  ov.appendChild(d);
+  const close = () => { wDraw = null; ov.remove(); };
+  ov.onclick = e => { if(e.target === ov) close(); };
+  const num = () => parseFloat(String(st.amt).replace(/\s/g, "").replace(",", ".")) || 0;
+
+  function sum(){
+    const dep = st.mode === "dep", a = num();
+    d.querySelector("#wsum").textContent = dep
+      ? "Будет зачислено через 1 минуту: " + fmt(a)
+      : "Вы получите: " + fmt(a) + " (без комиссии)";
+  }
+
+  function draw(){
+    const dep = st.mode === "dep";
+    const quick = [1000, 5000, 10000].map(v => '<button data-q="' + v + '">' + fmt(v) + '</button>').join("") + (dep ? "" : '<button data-q="all">Всё</button>');
+    const hist = wallet.ops.slice(0, 8).map(o => {
+      const isDep = o.type === "dep";
+      const when = new Date(o.t).toLocaleString("ru-RU", { day:"2-digit", month:"2-digit", hour:"2-digit", minute:"2-digit" });
+      if(o.type === "trade"){
+        const cls = o.amt > 0 ? "pos" : o.amt < 0 ? "neg" : "";
+        return '<div class="wrow"><span>Сделка<small>' + esc(o.m) + ' · ' + when + '</small></span><span class="' + cls + '">' + (o.amt > 0 ? "+" : o.amt < 0 ? "−" : "") + fmt(Math.abs(o.amt)) + '<small>' + (o.amt > 0 ? "Выигрыш" : o.amt < 0 ? "Проигрыш" : "Возврат") + '</small></span></div>';
+      }
+      return '<div class="wrow"><span>' + (isDep ? "Пополнение" : "Вывод") + '<small>' + esc(o.m) + ' · ' + when + '</small></span>'
+        + '<span class="' + (isDep ? "pos" : "neg") + '">' + (isDep ? "+" : "−") + fmt(o.amt) + '<small>' + (o.st === "done" ? "Выполнено" : "В обработке…") + '</small></span></div>';
+    }).join("") || '<div class="badge">Операций пока нет</div>';
+
+    d.innerHTML =
+      '<div class="wtabs"><button data-mode="dep" class="' + (dep ? "on" : "") + '">Пополнение</button><button data-mode="wd" class="' + (dep ? "" : "on") + '">Вывод</button></div>'
+      + '<div class="wbal">Баланс<b>' + fmt(wallet.bal) + '</b></div>'
+      + '<label for="wamt">Сумма, ₽</label><input id="wamt" inputmode="decimal" placeholder="0" value="' + esc(st.amt) + '">'
+      + '<div class="wq">' + quick + '</div>'
+      + (dep
+        ? '<label>Карта для пополнения</label><div class="wcardbox"><span>' + esc(DEPOSIT_CARD) + '</span><button id="wcopy">Копировать</button></div>'
+        : '<label for="wcard">Карта для вывода</label><input id="wcard" inputmode="numeric" autocomplete="off" placeholder="0000 0000 0000 0000" value="' + esc(st.card) + '">')
+      + '<div class="wsum" id="wsum"></div>'
+      + '<div class="werr" id="werr"></div><div class="wok" id="wok">' + esc(st.msg) + '</div>'
+      + '<button class="wgo" id="wgo">' + (dep ? "Пополнить" : "Вывести") + '</button>'
+      + '<button class="wx" id="wx">Закрыть</button>'
+      + '<div class="wnote">Минимум ' + fmt(MIN_SUM) + (dep ? ". Пополнение зачисляется в течение 1 минуты" : ", комиссии нет") + '.</div>'
+      + '<div class="whist">' + hist + '</div>';
+
+    d.querySelectorAll("[data-mode]").forEach(b => b.onclick = () => { st.mode = b.dataset.mode; st.msg = ""; draw(); });
+    d.querySelectorAll("[data-q]").forEach(b => b.onclick = () => {
+      st.amt = b.dataset.q === "all" ? String(wallet.bal) : b.dataset.q;
+      d.querySelector("#wamt").value = st.amt; sum();
+    });
+    d.querySelector("#wamt").oninput = e => { st.amt = e.target.value; st.msg = ""; d.querySelector("#wok").textContent = ""; d.querySelector("#werr").textContent = ""; sum(); };
+    const cp = d.querySelector("#wcopy");
+    if(cp) cp.onclick = async () => {
+      const txt = DEPOSIT_CARD.replace(/\D/g, "");
+      let ok = false;
+      try{ if(navigator.clipboard && window.isSecureContext){ await navigator.clipboard.writeText(txt); ok = true; } }catch(e){}
+      if(!ok){ // запасной способ для окон, где Clipboard API запрещён
+        const ta = document.createElement("textarea");
+        ta.value = txt; ta.setAttribute("readonly", ""); ta.style.cssText = "position:fixed;top:0;left:0;opacity:0";
+        document.body.appendChild(ta); ta.focus(); ta.select(); ta.setSelectionRange(0, txt.length);
+        try{ ok = document.execCommand("copy"); }catch(e){}
+        ta.remove();
+      }
+      if(!ok){ // последний вариант: выделить номер, чтобы скопировать вручную
+        const sp = d.querySelector(".wcardbox span");
+        try{ const r = document.createRange(); r.selectNodeContents(sp); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); }catch(e){}
+      }
+      cp.textContent = ok ? "Скопировано ✓" : "Выделено — нажмите Ctrl+C";
+      setTimeout(() => { cp.textContent = "Копировать"; }, 2000);
+    };
+    const wc = d.querySelector("#wcard"); if(wc) wc.oninput = e => {
+      const dg = e.target.value.replace(/\D/g, "").slice(0, 16);
+      st.card = dg.replace(/(.{4})/g, "$1 ").trim(); e.target.value = st.card;
+      wallet.card = st.card; store(wkey(), wallet); d.querySelector("#werr").textContent = "";
+    };
+    d.querySelector("#wx").onclick = close;
+    d.querySelector("#wgo").onclick = submit;
+    sum();
+  }
+
+  function submit(){
+    const dep = st.mode === "dep", a = Math.round(num()*100)/100, err = d.querySelector("#werr");
+    const bad = t => { err.textContent = t; };
+    if(a < MIN_SUM) return bad("Минимальная сумма — " + fmt(MIN_SUM));
+    if(dep && a > MAX_DEP) return bad("Максимум за одно пополнение — " + fmt(MAX_DEP));
+    const digits = (dep ? DEPOSIT_CARD : st.card).replace(/\D/g, "");
+    if(!dep && digits.length !== 16) return bad("Укажите номер карты: 16 цифр");
+    if(!dep && a > wallet.bal) return bad("Недостаточно средств на балансе");
+    const op = { t:Date.now(), type:st.mode, amt:a, m:(dep ? "Перевод на карту …" : "Карта …") + digits.slice(-4), st:"pending" };
+    if(!dep) wallet.bal = Math.round((wallet.bal - a)*100)/100;
+    wallet.ops.unshift(op); wallet.ops = wallet.ops.slice(0, 50);
+    saveWallet();
+    arm(wkey(), op);
+    st.msg = dep ? "Заявка на пополнение создана. Деньги поступят через 1 минуту" : "Заявка на вывод создана";
+    st.amt = "";
+    draw();
+  }
+
+  wDraw = draw; draw();
+  document.body.appendChild(ov);
+}
+document.getElementById("wbtn").onclick = () => walletDlg("dep");
+
+// ===== Лонг / Шорт: сделка на время. Выиграл — возвращается ставка + 7%, проиграл — ставка сгорает, ничья — возврат =====
+const PAYOUT = 0.7, MIN_TRADE = 10;
+const EXPS = [[30,"30 с"],[60,"1 мин"],[300,"5 мин"],[900,"15 мин"],[1800,"30 мин"]];
+const prices = {}, busy = new Set();
+let tExp = 30, tl = [], tmsgT = null;
+const $ = id => document.getElementById(id);
+const r2 = n => Math.round(n*100)/100;
+const nm = s => s.replace("USDT", "/USDT");
+const pf = p => p == null ? "—" : p.toLocaleString("en-US", { maximumFractionDigits: p < 1 ? 6 : p < 100 ? 4 : 2 });
+const tAmt = () => parseFloat(String($("tamt").value).replace(/\s/g, "").replace(",", ".")) || 0;
+const tmsg = (t, ok) => { const e = $("terr"); e.textContent = t; e.className = "terr" + (ok ? " ok" : ""); clearTimeout(tmsgT); if(t) tmsgT = setTimeout(() => { e.textContent = ""; }, 6000); };
+const dirName = d => d === "long" ? "Лонг" : "Шорт";
+
+function tradeUI(){
+  $("tsym").textContent = nm(sym);
+  const box = $("ttimes"); box.innerHTML = "";
+  EXPS.forEach(x => {
+    const b = document.createElement("button"); b.textContent = x[1]; b.className = x[0] === tExp ? "on" : "";
+    b.onclick = () => { tExp = x[0]; tradeUI(); }; box.appendChild(b);
+  });
+  const a = r2(tAmt());
+  $("tpay").innerHTML = a > 0 ? "Если угадали: вернётся <b>" + fmt(r2(a*(1 + PAYOUT))) + "</b> (+" + fmt(r2(a*PAYOUT)) + ", +" + Math.round(PAYOUT*100) + "%)" : "Доход при выигрыше: +" + Math.round(PAYOUT*100) + "%";
+  tradeTick();
+}
+function tradeTick(){
+  $("tpx").textContent = pf(prices[sym]);
+  const box = $("topen"), list = (wallet.trades || []);
+  box.innerHTML = list.map(t => {
+    const p = prices[t.sym], left = Math.max(0, Math.ceil((t.exp - Date.now())/1000));
+    const d = p == null ? 0 : (p - t.entry)*(t.dir === "long" ? 1 : -1);
+    const cls = d > 0 ? "pos" : d < 0 ? "neg" : "";
+    const mm = String(Math.floor(left/60)).padStart(2, "0") + ":" + String(left%60).padStart(2, "0");
+    return '<div class="wrow"><span>' + dirName(t.dir) + " " + esc(nm(t.sym)) + '<small>' + fmt(t.stake) + ' · вход ' + pf(t.entry) + '</small></span><span class="' + cls + '">' + mm + '<small>' + (d > 0 ? "+" + fmt(r2(t.stake*PAYOUT)) : d < 0 ? "−" + fmt(t.stake) : "0") + '</small></span></div>';
+  }).join("");
+}
+function lines(){
+  tl.forEach(l => { try{ candles.removePriceLine(l); }catch(e){} }); tl = [];
+  (wallet.trades || []).filter(t => t.sym === sym).forEach(t => tl.push(candles.createPriceLine({
+    price:t.entry, color:t.dir === "long" ? css("--up") : css("--down"), lineWidth:1, lineStyle:2, axisLabelVisible:true, title:dirName(t.dir) + " " + t.stake
+  })));
+}
+function openTrade(dir){
+  const a = r2(tAmt()), p = prices[sym];
+  if(p == null) return tmsg("Нет цены — подождите загрузки графика");
+  if(a < MIN_TRADE) return tmsg("Минимальная ставка — " + fmt(MIN_TRADE));
+  if(a > wallet.bal) return tmsg("Недостаточно средств — пополните кошелёк");
+  wallet.bal = r2(wallet.bal - a);
+  wallet.trades = wallet.trades || [];
+  wallet.trades.push({ id:Date.now() + "-" + Math.random().toString(36).slice(2, 7), sym, dir, stake:a, entry:p, t:Date.now(), exp:Date.now() + tExp*1000 });
+  saveWallet(); if(wDraw) wDraw(); lines(); tradeTick();
+  tmsg(dirName(dir) + " " + fmt(a) + " открыт, вход " + pf(p), true);
+}
+// Цена на момент экспирации: для «свежих» сделок — текущая, для давно истёкших (страница была закрыта) — по минутной свече.
+async function settlePrice(t){
+  const base = isFut(t.sym) ? "https://fapi.binance.com/fapi/v1/" : "https://api.binance.com/api/v3/";
+  try{
+    if(Date.now() - t.exp > 4000){
+      const d = await fetch(base + "klines?symbol=" + t.sym + "&interval=1m&startTime=" + Math.floor(t.exp/60000)*60000 + "&limit=1").then(r => r.json());
+      if(Array.isArray(d) && d.length) return +d[0][4];
+    }
+    const d = await fetch(base + "ticker/price?symbol=" + t.sym).then(r => r.json());
+    if(d && d.price) return +d.price;
+  }catch(e){}
+  return prices[t.sym] != null ? prices[t.sym] : null;
+}
+async function closeTrade(t){
+  busy.add(t.id);
+  const p = await settlePrice(t);
+  const c = (wallet.trades || []).find(x => x.id === t.id);
+  if(!c){ busy.delete(t.id); return; }
+  if(p == null){ setTimeout(() => busy.delete(t.id), 3000); return; }
+  const diff = (p - c.entry)*(c.dir === "long" ? 1 : -1);
+  let back = 0, net = -c.stake;
+  if(diff > 0){ back = r2(c.stake*(1 + PAYOUT)); net = r2(back - c.stake); }
+  else if(diff === 0){ back = c.stake; net = 0; }
+  wallet.bal = r2(wallet.bal + back);
+  wallet.trades = wallet.trades.filter(x => x.id !== c.id);
+  wallet.ops.unshift({ t:Date.now(), type:"trade", amt:net, m:dirName(c.dir) + " " + nm(c.sym) + " · " + pf(c.entry) + " → " + pf(p), st:"done" });
+  wallet.ops = wallet.ops.slice(0, 50);
+  busy.delete(c.id);
+  saveWallet(); if(wDraw) wDraw(); lines(); tradeTick();
+  tmsg(net > 0 ? "Выигрыш +" + fmt(net) + " (вернулось " + fmt(back) + ")" : net < 0 ? "Проигрыш −" + fmt(c.stake) : "Цена не изменилась — ставка возвращена", net >= 0);
+}
+$("tlong").onclick = () => openTrade("long");
+$("tshort").onclick = () => openTrade("short");
+$("tamt").oninput = tradeUI;
+document.querySelectorAll("[data-ta]").forEach(b => b.onclick = () => { $("tamt").value = b.dataset.ta === "all" ? String(wallet.bal) : b.dataset.ta; tradeUI(); });
+setInterval(() => {
+  (wallet.trades || []).forEach(t => { if(t.exp <= Date.now() && !busy.has(t.id)) closeTrade(t); });
+  tradeTick();
+}, 500);
+
+async function filterSymbols(){
+  try{
+    const [f, sp] = await Promise.all([
+      fetch("https://fapi.binance.com/fapi/v1/exchangeInfo").then(r => r.json()),
+      fetch("https://api.binance.com/api/v3/exchangeInfo?permissions=SPOT").then(r => r.json()).catch(() => null)
+    ]);
+    const fut = new Set(f.symbols.filter(x => x.status === "TRADING").map(x => x.symbol));
+    const spot = sp && sp.symbols ? new Set(sp.symbols.filter(x => x.status === "TRADING").map(x => x.symbol)) : null;
+    STOCKS = STOCKS.filter(x => fut.has(x));
+    CRYPTO = CRYPTO.filter(x => spot ? spot.has(x) : true);
+    SYMS = CRYPTO.concat(STOCKS);
+  }catch(e){}
+}
+renderAuth(); loadWallet();
+filterSymbols().finally(() => { render(); load(); });
+</script>
+</body>
+</html>
