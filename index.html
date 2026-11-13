@@ -85,6 +85,13 @@ aside button{display:block;width:100%;text-align:left;margin-bottom:6px;backgrou
 .neg{color:var(--down)}
 .wcardbox span{user-select:all;-webkit-user-select:all}
 .wcardbox{display:flex;align-items:center;justify-content:space-between;gap:8px;background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:10px 12px;margin:4px 0 8px;font-size:17px;font-weight:700;letter-spacing:1px}
+.wqr{margin:8px 0 12px;padding:12px;background:var(--panel);border:1px solid var(--border);border-radius:12px;text-align:center}
+.wqr img{display:block;width:min(100%,240px);max-height:260px;object-fit:contain;margin:8px auto;border-radius:8px;background:#fff}
+.wqr-empty{padding:18px 8px;color:var(--muted);font-size:13px}
+.wqr-actions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.wqr-actions button{font-size:12px}
+.wqr input{display:none}
+
 #side{width:236px;display:flex;flex-direction:column;gap:14px;min-height:0;overflow:auto}
 #side aside{width:auto;flex:none;min-height:80px}
 .trade{flex:none;background:var(--card);border:1px solid var(--border);border-radius:18px;padding:14px;box-shadow:var(--shadow)}
@@ -141,19 +148,21 @@ aside button{display:block;width:100%;text-align:left;margin-bottom:6px;backgrou
 </main>
 <script src="https://cdn.jsdelivr.net/npm/lightweight-charts@4.1.3/dist/lightweight-charts.standalone.production.js"></script>
 <script>
-// Вставьте сюда Client ID из Google Cloud Console, чтобы включить настоящий вход через Google.
-const GOOGLE_CLIENT_ID = "";
-let CRYPTO = ["BTCUSDT","ETHUSDT","SOLUSDT","BNBUSDT","XRPUSDT","DOGEUSDT","ADAUSDT","AVAXUSDT","LINKUSDT","TONUSDT","TRXUSDT","DOTUSDT","LTCUSDT","SUIUSDT","NEARUSDT","STRKUSDT",
+// НАЛАШТУВАННЯ ВЛАСНИКА: вставте OAuth 2.0 Client ID із Google Cloud Console.
+// Без Client ID вхід заблокований. Додайте домен сайту до Authorized JavaScript origins.
+const GOOGLE_CLIENT_ID = "ВСТАВТЕ_СЮДИ_GOOGLE_CLIENT_ID";
+let CRYPTO = ["CTRLUSDT","BTCUSDT","ETHUSDT","SOLUSDT","BNBUSDT","XRPUSDT","DOGEUSDT","ADAUSDT","AVAXUSDT","LINKUSDT","TONUSDT","TRXUSDT","DOTUSDT","LTCUSDT","SUIUSDT","NEARUSDT","STRKUSDT",
   "BCHUSDT","ATOMUSDT","UNIUSDT","AAVEUSDT","APTUSDT","ARBUSDT","OPUSDT","INJUSDT","FILUSDT","ETCUSDT","XLMUSDT","HBARUSDT","ICPUSDT","PEPEUSDT","SHIBUSDT","WIFUSDT","TAOUSDT","SEIUSDT","TIAUSDT","RENDERUSDT","FETUSDT","ONDOUSDT","ENAUSDT","JUPUSDT","ALGOUSDT","MKRUSDT","LDOUSDT","CRVUSDT","RUNEUSDT","IMXUSDT","GALAUSDT","SANDUSDT","MANAUSDT","BONKUSDT"];
 // Акции, ETF и металлы на Binance торгуются как бессрочные TradFi-контракты на фьючерсном рынке.
 // Список проверяется через exchangeInfo при старте: тикеры, которых нет на бирже, скрываются.
 let STOCKS = ["TSLAUSDT","NVDAUSDT","AAPLUSDT","AMZNUSDT","COINUSDT","MSTRUSDT","GOOGLUSDT","METAUSDT","MSFTUSDT","AMDUSDT","PLTRUSDT","HOODUSDT","CRCLUSDT","INTCUSDT","MRVLUSDT","CRWVUSDT","WMTUSDT","JPMUSDT","XAUUSDT","XAGUSDT"];
 let SYMS = CRYPTO.concat(STOCKS);
 const isFut = s => STOCKS.includes(s);
+const isCtrl = s => s === "CTRLUSDT";
 const BARS = 3000; // сколько свечей истории загружать на каждом таймфрейме
 const TFS = ["1m","5m","15m","1h","4h","1d","1w"];
 const STEP = {"1m":60,"5m":300,"15m":900,"1h":3600,"4h":14400,"1d":86400,"1w":604800};
-const BASE = {BTCUSDT:68000,ETHUSDT:3400,SOLUSDT:170,STRKUSDT:0.45,BNBUSDT:600,XRPUSDT:2.2,DOGEUSDT:0.2,ADAUSDT:0.7,AVAXUSDT:35,LINKUSDT:15,TONUSDT:3,TRXUSDT:0.25,DOTUSDT:5,LTCUSDT:90,SUIUSDT:3,NEARUSDT:3,TSLAUSDT:300,NVDAUSDT:180,AAPLUSDT:230,AMZNUSDT:220,COINUSDT:300,MSTRUSDT:300,XAUUSDT:4000,XAGUSDT:50,GOOGLUSDT:250,METAUSDT:700,MSFTUSDT:500,AMDUSDT:200,PLTRUSDT:150,HOODUSDT:100,CRCLUSDT:150,INTCUSDT:30,MRVLUSDT:80,CRWVUSDT:100,WMTUSDT:100,JPMUSDT:300};
+const BASE = {CTRLUSDT:1.00,BTCUSDT:68000,ETHUSDT:3400,SOLUSDT:170,STRKUSDT:0.45,BNBUSDT:600,XRPUSDT:2.2,DOGEUSDT:0.2,ADAUSDT:0.7,AVAXUSDT:35,LINKUSDT:15,TONUSDT:3,TRXUSDT:0.25,DOTUSDT:5,LTCUSDT:90,SUIUSDT:3,NEARUSDT:3,TSLAUSDT:300,NVDAUSDT:180,AAPLUSDT:230,AMZNUSDT:220,COINUSDT:300,MSTRUSDT:300,XAUUSDT:4000,XAGUSDT:50,GOOGLUSDT:250,METAUSDT:700,MSFTUSDT:500,AMDUSDT:200,PLTRUSDT:150,HOODUSDT:100,CRCLUSDT:150,INTCUSDT:30,MRVLUSDT:80,CRWVUSDT:100,WMTUSDT:100,JPMUSDT:300};
 let demoMode = false, sym = "BTCUSDT", tf = "1h", ws = null, favs = [], user = null, seq = 0;
 
 function store(k, v){ try{ if(v===undefined){ return JSON.parse(localStorage.getItem(k)); } localStorage.setItem(k, JSON.stringify(v)); }catch(e){ return null; } }
@@ -280,14 +289,18 @@ async function load(){
   const my = ++seq; clearInterval(tickTimer);
   if(ws){ try{ ws.close(); }catch(e){} ws = null; }
   let live = false, rows; cur = []; exhausted = false; loadingMore = false; demoMode = false;
-  try{
-    rows = await fetchHist();
-    live = true;
-  }catch(e){ rows = demoData(); demoMode = true; }
+  if(isCtrl(sym)){
+    rows = demoData(); demoMode = true;
+  } else {
+    try{
+      rows = await fetchHist();
+      live = true;
+    }catch(e){ rows = demoData(); demoMode = true; }
+  }
   if(my !== seq) return;
   cur = rows.slice(); setData(rows); prices[sym] = rows[rows.length-1].close; lines(); if(!live) startDemo();
   badgeText = "● Live · Binance" + (isFut(sym) ? " Futures" : "");
-  document.getElementById("badge").textContent = live ? badgeText + " · " + rows.length + " свечей" : "";
+  document.getElementById("badge").textContent = (live || isCtrl(sym)) ? badgeText + " · " + rows.length + " свечей" : "";
   if(live){
     try{
       ws = new WebSocket((isFut(sym) ? "wss://fstream.binance.com/ws/" : "wss://stream.binance.com:9443/ws/")+sym.toLowerCase()+"@kline_"+tf);
@@ -316,7 +329,13 @@ function render(){
   const sel = document.createElement("select");
   [["Крипто", CRYPTO], ["Акции и золото", STOCKS]].forEach(g => {
     const og = document.createElement("optgroup"); og.label = g[0];
-    g[1].forEach(s => { const o = document.createElement("option"); o.value = s; o.textContent = s.replace("USDT", "/USDT"); if(s === sym) o.selected = true; og.appendChild(o); });
+    g[1].forEach(s => {
+      const o = document.createElement("option");
+      o.value = s;
+      o.textContent = s.replace("USDT", "/USDT");
+      if(s === sym) o.selected = true;
+      og.appendChild(o);
+    });
     sel.appendChild(og);
   });
   sel.onchange = () => { sym = sel.value; render(); load(); };
@@ -344,7 +363,7 @@ function renderAuth(){
   a.innerHTML = "";
   if(!user){
     const b = document.createElement("button"); b.className = "gbtn";
-    b.innerHTML = G + "<span>Войти через Google</span>"; b.onclick = login; a.appendChild(b); return;
+    b.innerHTML = G + "<span>Увійти через Google</span>"; b.onclick = login; a.appendChild(b); return;
   }
   const w = document.createElement("div"); w.className = "me";
   const av = document.createElement("button"); av.className = "ava"; av.title = user.name;
@@ -362,46 +381,56 @@ function renderAuth(){
 document.addEventListener("click", () => { const m = document.querySelector(".menu"); if(m) m.hidden = true; });
 function setUser(u){ user = u; store("user", u); renderAuth(); loadWallet(); }
 
-function chooser(){
-  const accs = [["Иван Петренко","ivan.petrenko@gmail.com","#1a73e8"],["Рабочий аккаунт","work@example.com","#188038"],["Другой аккаунт","other@example.com","#a142f4"]];
-  const ov = document.createElement("div"); ov.className = "ov";
-  const d = document.createElement("div"); d.className = "dlg";
-  d.innerHTML = "<h3>Вход через Google</h3><p>Выберите аккаунт, чтобы продолжить</p>";
-  accs.forEach(a => {
-    const b = document.createElement("button"); b.className = "acc";
-    b.innerHTML = "<span class=\"ci\"></span><span><b></b><small></small></span>";
-    b.children[0].textContent = a[0].charAt(0); b.children[0].style.background = a[2];
-    b.querySelector("b").textContent = a[0]; b.querySelector("small").textContent = a[1];
-    b.onclick = () => { ov.remove(); setUser({ name:a[0], email:a[1], pic:"" }); };
-    d.appendChild(b);
-  });
-  ov.appendChild(d);
-  ov.onclick = e => { if(e.target === ov) ov.remove(); };
-  document.body.appendChild(ov);
-}
 function login(){
-  if(!GOOGLE_CLIENT_ID){ chooser(); return; }
+  if(!GOOGLE_CLIENT_ID || GOOGLE_CLIENT_ID === "ВСТАВТЕ_СЮДИ_GOOGLE_CLIENT_ID"){
+    alert("Власнику сайту: спочатку вставте Google OAuth Client ID у змінну GOOGLE_CLIENT_ID в коді.");
+    return;
+  }
   const go = () => {
-    // Открывает настоящее окно Google со списком всех ваших аккаунтов.
-    google.accounts.oauth2.initTokenClient({ client_id: GOOGLE_CLIENT_ID, scope: "openid email profile", prompt: "select_account", callback: async t => {
-      const r = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", { headers: { Authorization: "Bearer " + t.access_token } });
-      const p = await r.json();
-      setUser({ name:p.name, email:p.email, pic:p.picture });
-    }}).requestAccessToken();
+    google.accounts.oauth2.initTokenClient({
+      client_id: GOOGLE_CLIENT_ID,
+      scope: "openid email profile",
+      prompt: "select_account",
+      callback: async t => {
+        if(t.error || !t.access_token){
+          alert("Не вдалося увійти через Google. Спробуйте ще раз.");
+          return;
+        }
+        try{
+          const r = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
+            headers: { Authorization: "Bearer " + t.access_token }
+          });
+          if(!r.ok) throw new Error("Google userinfo error");
+          const p = await r.json();
+          if(!p.email || !p.email_verified){
+            alert("Google не підтвердив цю електронну пошту.");
+            return;
+          }
+          setUser({ name:p.name || p.email, email:p.email, pic:p.picture || "" });
+        }catch(e){
+          alert("Не вдалося отримати дані Google-акаунта. Перевірте інтернет і спробуйте ще раз.");
+        }
+      }
+    }).requestAccessToken();
   };
-  if(window.google && google.accounts) return go();
+  if(window.google && google.accounts && google.accounts.oauth2) return go();
   const s = document.createElement("script");
-  s.src = "https://accounts.google.com/gsi/client"; s.onload = go;
+  s.src = "https://accounts.google.com/gsi/client";
+  s.onload = go;
+  s.onerror = () => alert("Не вдалося завантажити сервіс входу Google.");
   document.head.appendChild(s);
 }
 
 // ===== Кошелёк в рублях (данные хранятся в localStorage) =====
 const fmt = n => new Intl.NumberFormat("ru-RU", { style:"currency", currency:"RUB", minimumFractionDigits:0, maximumFractionDigits:2 }).format(n);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" }[c]));
-// >>> ЗДЕСЬ меняйте карту, на которую клиент переводит деньги при пополнении <<<
-const DEPOSIT_CARD = "2200 0000 0000 0000";
+// >>> НАСТРОЙКИ ВЛАДЕЛЬЦА САЙТА: меняйте эти строки в коде <<<
+// Имя файла QR-кода. Положите qr.png рядом с HTML-файлом на хостинге.
+// Чтобы заменить QR, загрузите другой файл и поменяйте имя/путь здесь.
+const DEPOSIT_QR = "qr.png";
 const MIN_SUM = 100, MAX_DEP = 1000000, DEP_DELAY = 60000, WD_DELAY = 4000; // пополнение зачисляется через 1 минуту, комиссии на вывод нет
 let wallet = { bal:0, ops:[] }, wDraw = null;
+const depositQRImage = DEPOSIT_QR;
 const wkey = () => "wallet:" + (user && user.email ? user.email : "guest");
 
 function renderWallet(){ document.getElementById("wbtn").textContent = "💼 " + fmt(wallet.bal); }
@@ -472,7 +501,11 @@ function walletDlg(mode){
       + '<label for="wamt">Сумма, ₽</label><input id="wamt" inputmode="decimal" placeholder="0" value="' + esc(st.amt) + '">'
       + '<div class="wq">' + quick + '</div>'
       + (dep
-        ? '<label>Карта для пополнения</label><div class="wcardbox"><span>' + esc(DEPOSIT_CARD) + '</span><button id="wcopy">Копировать</button></div>'
+        ? '<label>QR-код для пополнения</label><div class="wqr">'
+          + (depositQRImage
+            ? '<img id="depositQRPreview" src="' + esc(depositQRImage) + '" alt="QR-код для пополнения">'
+            : '<div class="wqr-empty">QR-код не настроен владельцем сайта.</div>')
+          + '</div>'
         : '<label for="wcard">Карта для вывода</label><input id="wcard" inputmode="numeric" autocomplete="off" placeholder="0000 0000 0000 0000" value="' + esc(st.card) + '">')
       + '<div class="wsum" id="wsum"></div>'
       + '<div class="werr" id="werr"></div><div class="wok" id="wok">' + esc(st.msg) + '</div>'
@@ -487,25 +520,6 @@ function walletDlg(mode){
       d.querySelector("#wamt").value = st.amt; sum();
     });
     d.querySelector("#wamt").oninput = e => { st.amt = e.target.value; st.msg = ""; d.querySelector("#wok").textContent = ""; d.querySelector("#werr").textContent = ""; sum(); };
-    const cp = d.querySelector("#wcopy");
-    if(cp) cp.onclick = async () => {
-      const txt = DEPOSIT_CARD.replace(/\D/g, "");
-      let ok = false;
-      try{ if(navigator.clipboard && window.isSecureContext){ await navigator.clipboard.writeText(txt); ok = true; } }catch(e){}
-      if(!ok){ // запасной способ для окон, где Clipboard API запрещён
-        const ta = document.createElement("textarea");
-        ta.value = txt; ta.setAttribute("readonly", ""); ta.style.cssText = "position:fixed;top:0;left:0;opacity:0";
-        document.body.appendChild(ta); ta.focus(); ta.select(); ta.setSelectionRange(0, txt.length);
-        try{ ok = document.execCommand("copy"); }catch(e){}
-        ta.remove();
-      }
-      if(!ok){ // последний вариант: выделить номер, чтобы скопировать вручную
-        const sp = d.querySelector(".wcardbox span");
-        try{ const r = document.createRange(); r.selectNodeContents(sp); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); }catch(e){}
-      }
-      cp.textContent = ok ? "Скопировано ✓" : "Выделено — нажмите Ctrl+C";
-      setTimeout(() => { cp.textContent = "Копировать"; }, 2000);
-    };
     const wc = d.querySelector("#wcard"); if(wc) wc.oninput = e => {
       const dg = e.target.value.replace(/\D/g, "").slice(0, 16);
       st.card = dg.replace(/(.{4})/g, "$1 ").trim(); e.target.value = st.card;
@@ -521,10 +535,10 @@ function walletDlg(mode){
     const bad = t => { err.textContent = t; };
     if(a < MIN_SUM) return bad("Минимальная сумма — " + fmt(MIN_SUM));
     if(dep && a > MAX_DEP) return bad("Максимум за одно пополнение — " + fmt(MAX_DEP));
-    const digits = (dep ? DEPOSIT_CARD : st.card).replace(/\D/g, "");
+    const digits = dep ? "" : st.card.replace(/\D/g, "");
     if(!dep && digits.length !== 16) return bad("Укажите номер карты: 16 цифр");
     if(!dep && a > wallet.bal) return bad("Недостаточно средств на балансе");
-    const op = { t:Date.now(), type:st.mode, amt:a, m:(dep ? "Перевод на карту …" : "Карта …") + digits.slice(-4), st:"pending" };
+    const op = { t:Date.now(), type:st.mode, amt:a, m:dep ? "Пополнение через QR-код" : "Карта …" + digits.slice(-4), st:"pending" };
     if(!dep) wallet.bal = Math.round((wallet.bal - a)*100)/100;
     wallet.ops.unshift(op); wallet.ops = wallet.ops.slice(0, 50);
     saveWallet();
@@ -563,6 +577,33 @@ function tradeUI(){
   $("tpay").innerHTML = a > 0 ? "Если угадали: вернётся <b>" + fmt(r2(a*(1 + PAYOUT))) + "</b> (+" + fmt(r2(a*PAYOUT)) + ", +" + Math.round(PAYOUT*100) + "%)" : "Доход при выигрыше: +" + Math.round(PAYOUT*100) + "%";
   tradeTick();
 }
+
+// Приховане керування: змінює ціну CTRLUSDT на pct%
+function pump(pct){
+  if(!isCtrl(sym) || !cur.length) return;
+  const key = sym + tf;
+  const bars = demo[key] || cur;
+  const last = bars[bars.length - 1];
+  const step = STEP[tf];
+  const now = Math.floor(Date.now() / 1000 / step) * step;
+  let bar = last;
+  if(now > last.time){
+    bar = { time: now, open: last.close, high: last.close, low: last.close, close: last.close, v: 0 };
+    bars.push(bar);
+    cur = bars.slice();
+  }
+  const factor = 1 + pct / 100;
+  const newClose = Math.max(0.000001, bar.close * factor);
+  bar.close = newClose;
+  bar.high = Math.max(bar.high, newClose);
+  bar.low = Math.min(bar.low, newClose);
+  bar.v += 20 + Math.random() * 40;
+  prices[sym] = newClose;
+  BASE.CTRLUSDT = newClose;
+  candles.update({ time: bar.time, open: bar.open, high: bar.high, low: bar.low, close: newClose });
+  vol.update({ time: bar.time, value: bar.v, color: volColor(bar.open, newClose) });
+  tradeTick();
+}
 function tradeTick(){
   $("tpx").textContent = pf(prices[sym]);
   const box = $("topen"), list = (wallet.trades || []);
@@ -593,6 +634,7 @@ function openTrade(dir){
 }
 // Цена на момент экспирации: для «свежих» сделок — текущая, для давно истёкших (страница была закрыта) — по минутной свече.
 async function settlePrice(t){
+  if(isCtrl(t.sym)) return prices[t.sym] != null ? prices[t.sym] : null;
   const base = isFut(t.sym) ? "https://fapi.binance.com/fapi/v1/" : "https://api.binance.com/api/v3/";
   try{
     if(Date.now() - t.exp > 4000){
@@ -626,6 +668,18 @@ $("tlong").onclick = () => openTrade("long");
 $("tshort").onclick = () => openTrade("short");
 $("tamt").oninput = tradeUI;
 document.querySelectorAll("[data-ta]").forEach(b => b.onclick = () => { $("tamt").value = b.dataset.ta === "all" ? String(wallet.bal) : b.dataset.ta; tradeUI(); });
+// Приховане керування ціною CTRL: стрілки ↑/↓ або +/− (Shift = трохи сильніше)
+document.addEventListener("keydown", e => {
+  if(!isCtrl(sym)) return;
+  const tag = (e.target && e.target.tagName || "").toLowerCase();
+  if(tag === "input" || tag === "textarea" || tag === "select") return;
+  let pct = 0;
+  if(e.key === "ArrowUp" || e.key === "+" || e.key === "=") pct = e.shiftKey ? 0.8 : 0.25;
+  else if(e.key === "ArrowDown" || e.key === "-" || e.key === "_") pct = e.shiftKey ? -0.8 : -0.25;
+  else return;
+  e.preventDefault();
+  pump(pct);
+});
 setInterval(() => {
   (wallet.trades || []).forEach(t => { if(t.exp <= Date.now() && !busy.has(t.id)) closeTrade(t); });
   tradeTick();
@@ -640,7 +694,7 @@ async function filterSymbols(){
     const fut = new Set(f.symbols.filter(x => x.status === "TRADING").map(x => x.symbol));
     const spot = sp && sp.symbols ? new Set(sp.symbols.filter(x => x.status === "TRADING").map(x => x.symbol)) : null;
     STOCKS = STOCKS.filter(x => fut.has(x));
-    CRYPTO = CRYPTO.filter(x => spot ? spot.has(x) : true);
+    CRYPTO = CRYPTO.filter(x => isCtrl(x) || (spot ? spot.has(x) : true));
     SYMS = CRYPTO.concat(STOCKS);
   }catch(e){}
 }
