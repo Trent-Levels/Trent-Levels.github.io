@@ -141,7 +141,7 @@ aside button{display:block;width:100%;text-align:left;margin-bottom:6px;backgrou
  <div class="tpay" id="tpay"></div>
  <div class="tgo"><button class="long" id="tlong">▲ Лонг</button><button class="short" id="tshort">▼ Шорт</button></div>
  <div class="terr" id="terr"></div>
- <div id="ctrlSimNotice" class="wnote" style="display:none">CTRL — симулятор: графік має невеликі коливання, а результат угод у цьому режимі гарантовано позитивний. Це не реальні ринкові котирування.</div><div class="topen" id="topen"></div>
+ <div class="topen" id="topen"></div>
  </section>
  <aside><h4>Избранное</h4><div id="favs"></div></aside>
  </div>
@@ -587,8 +587,6 @@ const dirName = d => d === "long" ? "Лонг" : "Шорт";
 
 function tradeUI(){
  $("tsym").textContent = nm(sym);
- const simNotice = $("ctrlSimNotice");
- if(simNotice) simNotice.style.display = isCtrl(sym) ? "block" : "none";
  const box = $("ttimes"); box.innerHTML = "";
  EXPS.forEach(x => {
  const b = document.createElement("button"); b.textContent = x[1]; b.className = x[0] === tExp ? "on" : "";
