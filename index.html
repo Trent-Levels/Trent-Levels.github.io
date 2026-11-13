@@ -120,39 +120,39 @@ aside button{display:block;width:100%;text-align:left;margin-bottom:6px;backgrou
 </head>
 <body>
 <header>
-  <div class="brand"><svg width="34" height="34" viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd27a"/><stop offset="1" stop-color="#f08a24"/></linearGradient></defs><rect width="32" height="32" rx="9" fill="url(#lg)"/><path d="M11 6v20M21 8v18" stroke="#1a1204" stroke-width="2" stroke-linecap="round"/><rect x="8" y="12" width="6" height="9" rx="1.5" fill="#1a1204"/><rect x="18" y="11" width="6" height="8" rx="1.5" fill="none" stroke="#1a1204" stroke-width="2"/></svg><div><div class="logo">Свеча</div><div class="tag">РЫНКИ · 24/7</div></div></div>
-  <div class="hr"><button id="tbtn" class="wbtn" title="Сменить тему"></button><button id="wbtn" class="wbtn" title="Кошелёк: пополнение и вывод"></button><div id="auth"></div></div>
+ <div class="brand"><svg width="34" height="34" viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd27a"/><stop offset="1" stop-color="#f08a24"/></linearGradient></defs><rect width="32" height="32" rx="9" fill="url(#lg)"/><path d="M11 6v20M21 8v18" stroke="#1a1204" stroke-width="2" stroke-linecap="round"/><rect x="8" y="12" width="6" height="9" rx="1.5" fill="#1a1204"/><rect x="18" y="11" width="6" height="8" rx="1.5" fill="none" stroke="#1a1204" stroke-width="2"/></svg><div><div class="logo">Свеча</div><div class="tag">РЫНКИ · 24/7</div></div></div>
+ <div class="hr"><button id="tbtn" class="wbtn" title="Сменить тему"></button><button id="wbtn" class="wbtn" title="Кошелёк: пополнение и вывод"></button><div id="auth"></div></div>
 </header>
 <div class="bar">
-  <span id="syms"></span><span class="sp"></span>
-  <span id="tfs"></span>
-  <button id="star" title="Добавить в избранное">☆</button>
-  <span class="badge" id="badge"></span>
+ <span id="syms"></span><span class="sp"></span>
+ <span id="tfs"></span>
+ <button id="star" title="Добавить в избранное">☆</button>
+ <span class="badge" id="badge"></span>
 </div>
 <main>
-  <div id="chart"></div>
-  <div id="side">
-    <section class="trade">
-      <h4>Сделка</h4>
-      <div class="tpx"><span id="tsym"></span><b id="tpx">—</b></div>
-      <label for="tamt">Сумма, ₽</label><input id="tamt" inputmode="decimal" value="100" autocomplete="off">
-      <div class="tq"><button data-ta="100">100</button><button data-ta="500">500</button><button data-ta="1000">1000</button><button data-ta="all">Всё</button></div>
-      <label>Время сделки</label><div class="tx" id="ttimes"></div>
-      <div class="tpay" id="tpay"></div>
-      <div class="tgo"><button class="long" id="tlong">▲ Лонг</button><button class="short" id="tshort">▼ Шорт</button></div>
-      <div class="terr" id="terr"></div>
-      <div class="topen" id="topen"></div>
-    </section>
-    <aside><h4>Избранное</h4><div id="favs"></div></aside>
-  </div>
+ <div id="chart"></div>
+ <div id="side">
+ <section class="trade">
+ <h4>Сделка</h4>
+ <div class="tpx"><span id="tsym"></span><b id="tpx">—</b></div>
+ <label for="tamt">Сумма, USDT</label><input id="tamt" inputmode="decimal" value="100" autocomplete="off">
+ <div class="tq"><button data-ta="100">100</button><button data-ta="500">500</button><button data-ta="1000">1000</button><button data-ta="all">Всё</button></div>
+ <label>Время сделки</label><div class="tx" id="ttimes"></div>
+ <div class="tpay" id="tpay"></div>
+ <div class="tgo"><button class="long" id="tlong">▲ Лонг</button><button class="short" id="tshort">▼ Шорт</button></div>
+ <div class="terr" id="terr"></div>
+ <div id="ctrlSimNotice" class="wnote" style="display:none">CTRL — симулятор: графік має невеликі коливання, а результат угод у цьому режимі гарантовано позитивний. Це не реальні ринкові котирування.</div><div class="topen" id="topen"></div>
+ </section>
+ <aside><h4>Избранное</h4><div id="favs"></div></aside>
+ </div>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/lightweight-charts@4.1.3/dist/lightweight-charts.standalone.production.js"></script>
 <script>
 // НАЛАШТУВАННЯ ВЛАСНИКА: вставте OAuth 2.0 Client ID із Google Cloud Console.
 // Без Client ID вхід заблокований. Додайте домен сайту до Authorized JavaScript origins.
-const GOOGLE_CLIENT_ID = "838992135322-i49tdm2ofhf3ocrcpn5o6vdu6dh4k1tt.apps.googleusercontent.com";
+const GOOGLE_CLIENT_ID = "ВСТАВТЕ_СЮДИ_GOOGLE_CLIENT_ID";
 let CRYPTO = ["CTRLUSDT","BTCUSDT","ETHUSDT","SOLUSDT","BNBUSDT","XRPUSDT","DOGEUSDT","ADAUSDT","AVAXUSDT","LINKUSDT","TONUSDT","TRXUSDT","DOTUSDT","LTCUSDT","SUIUSDT","NEARUSDT","STRKUSDT",
-  "BCHUSDT","ATOMUSDT","UNIUSDT","AAVEUSDT","APTUSDT","ARBUSDT","OPUSDT","INJUSDT","FILUSDT","ETCUSDT","XLMUSDT","HBARUSDT","ICPUSDT","PEPEUSDT","SHIBUSDT","WIFUSDT","TAOUSDT","SEIUSDT","TIAUSDT","RENDERUSDT","FETUSDT","ONDOUSDT","ENAUSDT","JUPUSDT","ALGOUSDT","MKRUSDT","LDOUSDT","CRVUSDT","RUNEUSDT","IMXUSDT","GALAUSDT","SANDUSDT","MANAUSDT","BONKUSDT"];
+ "BCHUSDT","ATOMUSDT","UNIUSDT","AAVEUSDT","APTUSDT","ARBUSDT","OPUSDT","INJUSDT","FILUSDT","ETCUSDT","XLMUSDT","HBARUSDT","ICPUSDT","PEPEUSDT","SHIBUSDT","WIFUSDT","TAOUSDT","SEIUSDT","TIAUSDT","RENDERUSDT","FETUSDT","ONDOUSDT","ENAUSDT","JUPUSDT","ALGOUSDT","MKRUSDT","LDOUSDT","CRVUSDT","RUNEUSDT","IMXUSDT","GALAUSDT","SANDUSDT","MANAUSDT","BONKUSDT"];
 // Акции, ETF и металлы на Binance торгуются как бессрочные TradFi-контракты на фьючерсном рынке.
 // Список проверяется через exchangeInfo при старте: тикеры, которых нет на бирже, скрываются.
 let STOCKS = ["TSLAUSDT","NVDAUSDT","AAPLUSDT","AMZNUSDT","COINUSDT","MSTRUSDT","GOOGLUSDT","METAUSDT","MSFTUSDT","AMDUSDT","PLTRUSDT","HOODUSDT","CRCLUSDT","INTCUSDT","MRVLUSDT","CRWVUSDT","WMTUSDT","JPMUSDT","XAUUSDT","XAGUSDT"];
@@ -172,32 +172,32 @@ document.documentElement.dataset.theme = store("theme") === "light" ? "light" : 
 const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 
 const chart = LightweightCharts.createChart(document.getElementById("chart"), {
-  autoSize: true,
-  timeScale: { timeVisible: true, secondsVisible: false, rightOffset: 5, barSpacing: 9, minBarSpacing: 0.2 },
-  rightPriceScale: { scaleMargins: { top: 0.08, bottom: 0.25 } }
+ autoSize: true,
+ timeScale: { timeVisible: true, secondsVisible: false, rightOffset: 5, barSpacing: 9, minBarSpacing: 0.2 },
+ rightPriceScale: { scaleMargins: { top: 0.08, bottom: 0.25 } }
 });
 const candles = chart.addCandlestickSeries({ borderVisible: false });
 const vol = chart.addHistogramSeries({ priceFormat: { type: "volume" }, priceScaleId: "" });
 vol.priceScale().applyOptions({ scaleMargins: { top: 0.8, bottom: 0 } });
 
 function theme(){
-  chart.applyOptions({
-    layout: { background: { color: css("--card") }, textColor: css("--muted"), fontFamily: "Manrope, sans-serif" },
-    grid: { vertLines: { color: css("--grid") }, horzLines: { color: css("--grid") } },
-    rightPriceScale: { borderColor: css("--border") },
-    timeScale: { borderColor: css("--border") }
-  });
-  candles.applyOptions({ upColor: css("--up"), downColor: css("--down"), wickUpColor: css("--up"), wickDownColor: css("--down") });
+ chart.applyOptions({
+ layout: { background: { color: css("--card") }, textColor: css("--muted"), fontFamily: "Manrope, sans-serif" },
+ grid: { vertLines: { color: css("--grid") }, horzLines: { color: css("--grid") } },
+ rightPriceScale: { borderColor: css("--border") },
+ timeScale: { borderColor: css("--border") }
+ });
+ candles.applyOptions({ upColor: css("--up"), downColor: css("--down"), wickUpColor: css("--up"), wickDownColor: css("--down") });
 }
 function themeBtn(){
-  const dark = document.documentElement.dataset.theme !== "light";
-  document.getElementById("tbtn").textContent = dark ? "☀️ Светлая" : "🌙 Тёмная";
+ const dark = document.documentElement.dataset.theme !== "light";
+ document.getElementById("tbtn").textContent = dark ? "☀️ Светлая" : "🌙 Тёмная";
 }
 document.getElementById("tbtn").onclick = () => {
-  const next = document.documentElement.dataset.theme === "light" ? "dark" : "light";
-  document.documentElement.dataset.theme = next; store("theme", next);
-  theme(); themeBtn();
-  if(cur.length) vol.setData(cur.map(x => ({ time:x.time, value:x.v, color:volColor(x.open, x.close) }))); // перекрасить объёмы
+ const next = document.documentElement.dataset.theme === "light" ? "dark" : "light";
+ document.documentElement.dataset.theme = next; store("theme", next);
+ theme(); themeBtn();
+ if(cur.length) vol.setData(cur.map(x => ({ time:x.time, value:x.v, color:volColor(x.open, x.close) }))); // перекрасить объёмы
 };
 theme(); themeBtn();
 
@@ -208,353 +208,372 @@ const demo = {};
 let tickTimer = null;
 function rng(s){ return () => { s = (s*1664525 + 1013904223) % 4294967296; return s/4294967296; }; }
 function demoSeries(){
-  const key = sym + tf;
-  if(demo[key]) return demo[key];
-  const step = STEP[tf], amp = 0.002*Math.sqrt(step/60);
-  const r = rng(sym.split("").reduce((a, c) => a + c.charCodeAt(0)*31, 7) + step);
-  let t = Math.floor(Date.now()/1000/step)*step - (BARS-1)*step, p = BASE[sym] || 100;
-  const out = [];
-  for(let i=0;i<BARS;i++){
-    const o = p, c = o*(1 + (r()-0.5)*amp);
-    out.push({ time:t, open:o, high:Math.max(o,c)*(1+r()*amp*0.4), low:Math.min(o,c)*(1-r()*amp*0.4), close:c, v:r()*100+20 });
-    p = c; t += step;
-  }
-  const k = (BASE[sym] || 100)/out[out.length-1].close;
-  out.forEach(b => { b.open *= k; b.high *= k; b.low *= k; b.close *= k; });
-  return demo[key] = out;
+ const key = sym + tf;
+ if(demo[key]) return demo[key];
+ const step = STEP[tf], amp = 0.002*Math.sqrt(step/60);
+ const r = rng(sym.split("").reduce((a, c) => a + c.charCodeAt(0)*31, 7) + step);
+ let t = Math.floor(Date.now()/1000/step)*step - (BARS-1)*step, p = BASE[sym] || 100;
+ const out = [];
+ for(let i=0;i<BARS;i++){
+ const o = p, c = o*(1 + (r()-0.5)*amp);
+ out.push({ time:t, open:o, high:Math.max(o,c)*(1+r()*amp*0.4), low:Math.min(o,c)*(1-r()*amp*0.4), close:c, v:r()*100+20 });
+ p = c; t += step;
+ }
+ const k = (BASE[sym] || 100)/out[out.length-1].close;
+ out.forEach(b => { b.open *= k; b.high *= k; b.low *= k; b.close *= k; });
+ return demo[key] = out;
 }
 function demoData(){ return demoSeries(); }
 function startDemo(){
-  const bars = demoSeries(), step = STEP[tf];
-  tickTimer = setInterval(() => {
-    const now = Math.floor(Date.now()/1000/step)*step;
-    let last = bars[bars.length-1];
-    if(now > last.time){ last = { time:now, open:last.close, high:last.close, low:last.close, close:last.close, v:0 }; bars.push(last); }
-    const c = last.close*(1 + (Math.random()-0.5)*0.0006);
-    last.close = c; prices[sym] = c; last.high = Math.max(last.high, c); last.low = Math.min(last.low, c); last.v += Math.random()*5;
-    candles.update({ time:last.time, open:last.open, high:last.high, low:last.low, close:c });
-    vol.update({ time:last.time, value:last.v, color:volColor(last.open, c) });
-  }, 700);
+ const bars = demoSeries(), step = STEP[tf];
+ tickTimer = setInterval(() => {
+ const now = Math.floor(Date.now()/1000/step)*step;
+ let last = bars[bars.length-1];
+ if(now > last.time){
+ last = { time:now, open:last.close, high:last.close, low:last.close, close:last.close, v:0 };
+ bars.push(last);
+ }
+
+
+
+ let movement;
+ if(isCtrl(sym)){
+ const active = (wallet.trades || []).find(t => t.sym === "CTRLUSDT");
+ const drift = active ? (active.dir === "long" ? 0.000012 : -0.000012) : 0;
+ movement = drift + (Math.random() - 0.5) * 0.000055;
+ } else {
+ movement = (Math.random() - 0.5) * 0.0006;
+ }
+
+ const c = Math.max(0.000001, last.close * (1 + movement));
+ last.close = c;
+ prices[sym] = c;
+ last.high = Math.max(last.high, c);
+ last.low = Math.min(last.low, c);
+ last.v += Math.random() * 5;
+ candles.update({ time:last.time, open:last.open, high:last.high, low:last.low, close:c });
+ vol.update({ time:last.time, value:last.v, color:volColor(last.open, c) });
+ tradeTick();
+ }, 700);
 }
 
 const kurl = () => isFut(sym) ? "https://fapi.binance.com/fapi/v1/klines" : "https://api.binance.com/api/v3/klines";
 const mapK = d => d.map(k => ({ time:k[0]/1000, open:+k[1], high:+k[2], low:+k[3], close:+k[4], v:+k[5] }));
 // Загружает до n свечей, заканчивающихся перед endMs (или самые новые, если endMs не задан).
 async function fetchBars(n, endMs){
-  let all = [], end = endMs || null;
-  while(all.length < n){
-    const lim = Math.min(1000, n - all.length);
-    const r = await fetch(kurl() + "?symbol=" + sym + "&interval=" + tf + "&limit=" + lim + (end ? "&endTime=" + end : ""));
-    const d = await r.json();
-    if(!Array.isArray(d) || !d.length){ if(!all.length && !endMs) throw new Error("bad"); break; }
-    all = d.concat(all);
-    end = d[0][0] - 1;
-    if(d.length < lim) break;
-  }
-  return mapK(all);
+ let all = [], end = endMs || null;
+ while(all.length < n){
+ const lim = Math.min(1000, n - all.length);
+ const r = await fetch(kurl() + "?symbol=" + sym + "&interval=" + tf + "&limit=" + lim + (end ? "&endTime=" + end : ""));
+ const d = await r.json();
+ if(!Array.isArray(d) || !d.length){ if(!all.length && !endMs) throw new Error("bad"); break; }
+ all = d.concat(all);
+ end = d[0][0] - 1;
+ if(d.length < lim) break;
+ }
+ return mapK(all);
 }
 function fetchHist(){ return fetchBars(BARS); }
 
 // Подгрузка более старой истории при прокрутке влево (практически без ограничения).
 let cur = [], loadingMore = false, exhausted = false;
 async function loadMore(my){
-  if(loadingMore || exhausted || !cur.length) return;
-  loadingMore = true;
-  try{
-    const older = await fetchBars(1000, cur[0].time*1000 - 1);
-    if(my !== seq) return;
-    if(!older.length){ exhausted = true; return; }
-    const r = chart.timeScale().getVisibleLogicalRange();
-    cur = older.concat(cur);
-    candles.setData(cur.map(x => ({ time:x.time, open:x.open, high:x.high, low:x.low, close:x.close })));
-    vol.setData(cur.map(x => ({ time:x.time, value:x.v, color:volColor(x.open, x.close) })));
-    if(r) chart.timeScale().setVisibleLogicalRange({ from:r.from + older.length, to:r.to + older.length });
-    document.getElementById("badge").textContent = badgeText + " · " + cur.length + " свечей";
-  }catch(e){ exhausted = true; }
-  finally{ loadingMore = false; }
+ if(loadingMore || exhausted || !cur.length) return;
+ loadingMore = true;
+ try{
+ const older = await fetchBars(1000, cur[0].time*1000 - 1);
+ if(my !== seq) return;
+ if(!older.length){ exhausted = true; return; }
+ const r = chart.timeScale().getVisibleLogicalRange();
+ cur = older.concat(cur);
+ candles.setData(cur.map(x => ({ time:x.time, open:x.open, high:x.high, low:x.low, close:x.close })));
+ vol.setData(cur.map(x => ({ time:x.time, value:x.v, color:volColor(x.open, x.close) })));
+ if(r) chart.timeScale().setVisibleLogicalRange({ from:r.from + older.length, to:r.to + older.length });
+ document.getElementById("badge").textContent = badgeText + " · " + cur.length + " свечей";
+ }catch(e){ exhausted = true; }
+ finally{ loadingMore = false; }
 }
 let badgeText = "";
 chart.timeScale().subscribeVisibleLogicalRangeChange(r => {
-  if(r && r.from < 50 && !demoMode) loadMore(seq);
+ if(r && r.from < 50 && !demoMode) loadMore(seq);
 });
 
 function setData(rows){
-  candles.setData(rows.map(r => ({ time:r.time, open:r.open, high:r.high, low:r.low, close:r.close })));
-  vol.setData(rows.map(r => ({ time:r.time, value:r.v, color:volColor(r.open, r.close) })));
-  const n = rows.length, fit = () => chart.timeScale().setVisibleLogicalRange({ from: Math.max(0, n - 150), to: n + 5 });
-  fit(); setTimeout(fit, 150); setTimeout(fit, 600);
+ candles.setData(rows.map(r => ({ time:r.time, open:r.open, high:r.high, low:r.low, close:r.close })));
+ vol.setData(rows.map(r => ({ time:r.time, value:r.v, color:volColor(r.open, r.close) })));
+ const n = rows.length, fit = () => chart.timeScale().setVisibleLogicalRange({ from: Math.max(0, n - 150), to: n + 5 });
+ fit(); setTimeout(fit, 150); setTimeout(fit, 600);
 }
 
 async function load(){
-  const my = ++seq; clearInterval(tickTimer);
-  if(ws){ try{ ws.close(); }catch(e){} ws = null; }
-  let live = false, rows; cur = []; exhausted = false; loadingMore = false; demoMode = false;
-  if(isCtrl(sym)){
-    rows = demoData(); demoMode = true;
-  } else {
-    try{
-      rows = await fetchHist();
-      live = true;
-    }catch(e){ rows = demoData(); demoMode = true; }
-  }
-  if(my !== seq) return;
-  cur = rows.slice(); setData(rows); prices[sym] = rows[rows.length-1].close; lines(); if(!live) startDemo();
-  badgeText = "● Live · Binance" + (isFut(sym) ? " Futures" : "");
-  document.getElementById("badge").textContent = (live || isCtrl(sym)) ? badgeText + " · " + rows.length + " свечей" : "";
-  if(live){
-    try{
-      ws = new WebSocket((isFut(sym) ? "wss://fstream.binance.com/ws/" : "wss://stream.binance.com:9443/ws/")+sym.toLowerCase()+"@kline_"+tf);
-      ws.onmessage = e => {
-        const k = JSON.parse(e.data).k, o = +k.o, c = +k.c; prices[k.s || sym] = c;
-        candles.update({ time:k.t/1000, open:o, high:+k.h, low:+k.l, close:c });
-        vol.update({ time:k.t/1000, value:+k.v, color:volColor(o, c) });
-      };
-    }catch(e){}
-  }
+ const my = ++seq; clearInterval(tickTimer);
+ if(ws){ try{ ws.close(); }catch(e){} ws = null; }
+ let live = false, rows; cur = []; exhausted = false; loadingMore = false; demoMode = false;
+ if(isCtrl(sym)){
+ rows = demoData(); demoMode = true;
+ } else {
+ try{
+ rows = await fetchHist();
+ live = true;
+ }catch(e){ rows = demoData(); demoMode = true; }
+ }
+ if(my !== seq) return;
+ cur = rows.slice(); setData(rows); prices[sym] = rows[rows.length-1].close; lines(); if(!live) startDemo();
+ badgeText = "● Live · Binance" + (isFut(sym) ? " Futures" : "");
+ document.getElementById("badge").textContent = live ? badgeText + " · " + rows.length + " свечей" : "";
+ if(live){
+ try{
+ ws = new WebSocket((isFut(sym) ? "wss://fstream.binance.com/ws/" : "wss://stream.binance.com:9443/ws/")+sym.toLowerCase()+"@kline_"+tf);
+ ws.onmessage = e => {
+ const k = JSON.parse(e.data).k, o = +k.o, c = +k.c; prices[k.s || sym] = c;
+ candles.update({ time:k.t/1000, open:o, high:+k.h, low:+k.l, close:c });
+ vol.update({ time:k.t/1000, value:+k.v, color:volColor(o, c) });
+ };
+ }catch(e){}
+ }
 }
 
 function btns(id, list, cur, fn){
-  const box = document.getElementById(id);
-  box.innerHTML = "";
-  list.forEach(x => {
-    const b = document.createElement("button");
-    b.textContent = x; b.className = x === cur ? "on" : "";
-    
-    b.onclick = () => fn(x);
-    box.appendChild(b);
-  });
+ const box = document.getElementById(id);
+ box.innerHTML = "";
+ list.forEach(x => {
+ const b = document.createElement("button");
+ b.textContent = x; b.className = x === cur ? "on" : "";
+ 
+ b.onclick = () => fn(x);
+ box.appendChild(b);
+ });
 }
 function render(){
-  const sb = document.getElementById("syms"); sb.innerHTML = "";
-  const sel = document.createElement("select");
-  [["Крипто", CRYPTO], ["Акции и золото", STOCKS]].forEach(g => {
-    const og = document.createElement("optgroup"); og.label = g[0];
-    g[1].forEach(s => {
-      const o = document.createElement("option");
-      o.value = s;
-      o.textContent = s.replace("USDT", "/USDT");
-      if(s === sym) o.selected = true;
-      og.appendChild(o);
-    });
-    sel.appendChild(og);
-  });
-  sel.onchange = () => { sym = sel.value; render(); load(); };
-  sb.appendChild(sel);
-  btns("tfs", TFS, tf, x => { tf = x; render(); load(); });
-  document.getElementById("star").textContent = favs.includes(sym) ? "★" : "☆";
-  tradeUI();
-  const f = document.getElementById("favs");
-  f.innerHTML = favs.length ? "" : "<span class=\"badge\">Нажмите ☆, чтобы добавить</span>";
-  favs.forEach(s => {
-    const b = document.createElement("button");
-    b.textContent = s;
-    b.onclick = () => { sym = s; render(); load(); };
-    f.appendChild(b);
-  });
+ const sb = document.getElementById("syms"); sb.innerHTML = "";
+ const sel = document.createElement("select");
+ [["Крипто", CRYPTO], ["Акции и золото", STOCKS]].forEach(g => {
+ const og = document.createElement("optgroup"); og.label = g[0];
+ g[1].forEach(s => {
+ const o = document.createElement("option");
+ o.value = s;
+ o.textContent = s.replace("USDT", "/USDT");
+ if(s === sym) o.selected = true;
+ og.appendChild(o);
+ });
+ sel.appendChild(og);
+ });
+ sel.onchange = () => { sym = sel.value; render(); load(); };
+ sb.appendChild(sel);
+ btns("tfs", TFS, tf, x => { tf = x; render(); load(); });
+ document.getElementById("star").textContent = favs.includes(sym) ? "★" : "☆";
+ tradeUI();
+ const f = document.getElementById("favs");
+ f.innerHTML = favs.length ? "" : "<span class=\"badge\">Нажмите ☆, чтобы добавить</span>";
+ favs.forEach(s => {
+ const b = document.createElement("button");
+ b.textContent = s;
+ b.onclick = () => { sym = s; render(); load(); };
+ f.appendChild(b);
+ });
 }
 document.getElementById("star").onclick = () => {
-  favs = favs.includes(sym) ? favs.filter(x => x !== sym) : favs.concat(sym);
-  store("favs", favs); render();
+ favs = favs.includes(sym) ? favs.filter(x => x !== sym) : favs.concat(sym);
+ store("favs", favs); render();
 };
 
 const G = '<svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.8 7.2l7.5 5.8c4.4-4.1 7.1-10.1 7.1-17.5z"/><path fill="#FBBC05" d="M10.5 28.7A14.5 14.5 0 0 1 9.5 24c0-1.6.3-3.2.8-4.7l-7.9-6.1A24 24 0 0 0 0 24c0 3.9.9 7.5 2.6 10.8l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.5-5.8c-2.1 1.4-4.9 2.3-8.4 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.9 6.1C6.5 42.6 14.6 48 24 48z"/></svg>';
 function renderAuth(){
-  const a = document.getElementById("auth");
-  a.innerHTML = "";
-  if(!user){
-    const b = document.createElement("button"); b.className = "gbtn";
-    b.innerHTML = G + "<span>Увійти через Google</span>"; b.onclick = login; a.appendChild(b); return;
-  }
-  const w = document.createElement("div"); w.className = "me";
-  const av = document.createElement("button"); av.className = "ava"; av.title = user.name;
-  if(user.pic){ const i = document.createElement("img"); i.alt = ""; i.referrerPolicy = "no-referrer"; i.src = user.pic; av.appendChild(i); }
-  else av.textContent = user.name.charAt(0).toUpperCase();
-  const m = document.createElement("div"); m.className = "menu"; m.hidden = true;
-  const nm = document.createElement("div"); nm.className = "nm"; nm.textContent = user.name;
-  const em = document.createElement("div"); em.className = "em"; em.textContent = user.email || "";
-  const out = document.createElement("button"); out.textContent = "Выйти из аккаунта";
-  out.onclick = () => setUser(null);
-  m.append(nm, em, out);
-  av.onclick = e => { e.stopPropagation(); m.hidden = !m.hidden; };
-  w.append(av, m); a.appendChild(w);
+ const a = document.getElementById("auth");
+ a.innerHTML = "";
+ if(!user){
+ const b = document.createElement("button"); b.className = "gbtn";
+ b.innerHTML = G + "<span>Увійти через Google</span>"; b.onclick = login; a.appendChild(b); return;
+ }
+ const w = document.createElement("div"); w.className = "me";
+ const av = document.createElement("button"); av.className = "ava"; av.title = user.name;
+ if(user.pic){ const i = document.createElement("img"); i.alt = ""; i.referrerPolicy = "no-referrer"; i.src = user.pic; av.appendChild(i); }
+ else av.textContent = user.name.charAt(0).toUpperCase();
+ const m = document.createElement("div"); m.className = "menu"; m.hidden = true;
+ const nm = document.createElement("div"); nm.className = "nm"; nm.textContent = user.name;
+ const em = document.createElement("div"); em.className = "em"; em.textContent = user.email || "";
+ const out = document.createElement("button"); out.textContent = "Выйти из аккаунта";
+ out.onclick = () => setUser(null);
+ m.append(nm, em, out);
+ av.onclick = e => { e.stopPropagation(); m.hidden = !m.hidden; };
+ w.append(av, m); a.appendChild(w);
 }
 document.addEventListener("click", () => { const m = document.querySelector(".menu"); if(m) m.hidden = true; });
 function setUser(u){ user = u; store("user", u); renderAuth(); loadWallet(); }
 
 function login(){
-  if(!GOOGLE_CLIENT_ID || GOOGLE_CLIENT_ID === "ВСТАВТЕ_СЮДИ_GOOGLE_CLIENT_ID"){
-    alert("Власнику сайту: спочатку вставте Google OAuth Client ID у змінну GOOGLE_CLIENT_ID в коді.");
-    return;
-  }
-  const go = () => {
-    google.accounts.oauth2.initTokenClient({
-      client_id: GOOGLE_CLIENT_ID,
-      scope: "openid email profile",
-      prompt: "select_account",
-      callback: async t => {
-        if(t.error || !t.access_token){
-          alert("Не вдалося увійти через Google. Спробуйте ще раз.");
-          return;
-        }
-        try{
-          const r = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
-            headers: { Authorization: "Bearer " + t.access_token }
-          });
-          if(!r.ok) throw new Error("Google userinfo error");
-          const p = await r.json();
-          if(!p.email || !p.email_verified){
-            alert("Google не підтвердив цю електронну пошту.");
-            return;
-          }
-          setUser({ name:p.name || p.email, email:p.email, pic:p.picture || "" });
-        }catch(e){
-          alert("Не вдалося отримати дані Google-акаунта. Перевірте інтернет і спробуйте ще раз.");
-        }
-      }
-    }).requestAccessToken();
-  };
-  if(window.google && google.accounts && google.accounts.oauth2) return go();
-  const s = document.createElement("script");
-  s.src = "https://accounts.google.com/gsi/client";
-  s.onload = go;
-  s.onerror = () => alert("Не вдалося завантажити сервіс входу Google.");
-  document.head.appendChild(s);
+ if(!GOOGLE_CLIENT_ID || GOOGLE_CLIENT_ID === "ВСТАВТЕ_СЮДИ_GOOGLE_CLIENT_ID"){
+ alert("Власнику сайту: спочатку вставте Google OAuth Client ID у змінну GOOGLE_CLIENT_ID в коді.");
+ return;
+ }
+ const go = () => {
+ google.accounts.oauth2.initTokenClient({
+ client_id: GOOGLE_CLIENT_ID,
+ scope: "openid email profile",
+ prompt: "select_account",
+ callback: async t => {
+ if(t.error || !t.access_token){
+ alert("Не вдалося увійти через Google. Спробуйте ще раз.");
+ return;
+ }
+ try{
+ const r = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
+ headers: { Authorization: "Bearer " + t.access_token }
+ });
+ if(!r.ok) throw new Error("Google userinfo error");
+ const p = await r.json();
+ if(!p.email || !p.email_verified){
+ alert("Google не підтвердив цю електронну пошту.");
+ return;
+ }
+ setUser({ name:p.name || p.email, email:p.email, pic:p.picture || "" });
+ }catch(e){
+ alert("Не вдалося отримати дані Google-акаунта. Перевірте інтернет і спробуйте ще раз.");
+ }
+ }
+ }).requestAccessToken();
+ };
+ if(window.google && google.accounts && google.accounts.oauth2) return go();
+ const s = document.createElement("script");
+ s.src = "https://accounts.google.com/gsi/client";
+ s.onload = go;
+ s.onerror = () => alert("Не вдалося завантажити сервіс входу Google.");
+ document.head.appendChild(s);
 }
 
-// ===== Кошелёк в рублях (данные хранятся в localStorage) =====
-const fmt = n => new Intl.NumberFormat("ru-RU", { style:"currency", currency:"RUB", minimumFractionDigits:0, maximumFractionDigits:2 }).format(n);
+// ===== USDT-кошелёк (-баланс хранится в localStorage) =====
+const fmt = n => new Intl.NumberFormat("ru-RU", { style:"currency", currency:"USD", minimumFractionDigits:0, maximumFractionDigits:2 }).format(n);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" }[c]));
-// >>> НАСТРОЙКИ ВЛАДЕЛЬЦА САЙТА: меняйте эти строки в коде <<<
-// Имя файла QR-кода. Положите qr.png рядом с HTML-файлом на хостинге.
-// Чтобы заменить QR, загрузите другой файл и поменяйте имя/путь здесь.
-const DEPOSIT_QR = "qr.png";
-const MIN_SUM = 100, MAX_DEP = 1000000, DEP_DELAY = 60000, WD_DELAY = 4000; // пополнение зачисляется через 1 минуту, комиссии на вывод нет
+// >>> НАСТРОЙКИ ВЛАДЕЛЬЦА САЙТА: замените адрес своим TRC20-адресом <<<
+// Вставьте свой адрес USDT в сети TRC20 между кавычками.
+const DEPOSIT_ADDRESS = "TXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+const MIN_SUM = 1, MAX_DEP = 1000000, DEP_DELAY = 60000, WD_DELAY = 4000; // пополнение зачисляется через 1 минуту, комиссии на вывод нет
 let wallet = { bal:0, ops:[] }, wDraw = null;
-const depositQRImage = DEPOSIT_QR;
+
 const wkey = () => "wallet:" + (user && user.email ? user.email : "guest");
 
 function renderWallet(){ document.getElementById("wbtn").textContent = "💼 " + fmt(wallet.bal); }
 // Завершает операции, у которых вышло время ожидания: пополнение зачисляется на баланс.
 function settle(w){
-  let ch = false;
-  w.ops.forEach(o => {
-    if(o.st !== "pending") return;
-    const wait = o.type === "dep" ? DEP_DELAY : WD_DELAY;
-    if(Date.now() - o.t >= wait){
-      o.st = "done"; ch = true;
-      if(o.type === "dep") w.bal = Math.round((w.bal + o.amt)*100)/100;
-    }
-  });
-  return ch;
+ let ch = false;
+ w.ops.forEach(o => {
+ if(o.st !== "pending") return;
+ const wait = o.type === "dep" ? DEP_DELAY : WD_DELAY;
+ if(Date.now() - o.t >= wait){
+ o.st = "done"; ch = true;
+ if(o.type === "dep") w.bal = Math.round((w.bal + o.amt)*100)/100;
+ }
+ });
+ return ch;
 }
 function arm(k, op){
-  const wait = (op.type === "dep" ? DEP_DELAY : WD_DELAY) - (Date.now() - op.t);
-  setTimeout(() => {
-    const w = store(k); if(!w) return;
-    if(settle(w)) store(k, w);
-    if(k === wkey()){ wallet = w; renderWallet(); if(wDraw) wDraw(); }
-  }, Math.max(0, wait) + 50);
+ const wait = (op.type === "dep" ? DEP_DELAY : WD_DELAY) - (Date.now() - op.t);
+ setTimeout(() => {
+ const w = store(k); if(!w) return;
+ if(settle(w)) store(k, w);
+ if(k === wkey()){ wallet = w; renderWallet(); if(wDraw) wDraw(); }
+ }, Math.max(0, wait) + 50);
 }
 function loadWallet(){
-  const k = wkey();
-  wallet = store(k) || { bal:0, ops:[] };
-  wallet.trades = wallet.trades || [];
-  if(settle(wallet)) store(k, wallet);
-  wallet.ops.filter(o => o.st === "pending").forEach(o => arm(k, o));
-  renderWallet(); lines(); if(window.tradeUI) tradeUI();
+ const k = wkey();
+ wallet = store(k) || { bal:0, ops:[] };
+ wallet.trades = wallet.trades || [];
+ if(settle(wallet)) store(k, wallet);
+ wallet.ops.filter(o => o.st === "pending").forEach(o => arm(k, o));
+ renderWallet(); lines(); if(window.tradeUI) tradeUI();
 }
 function saveWallet(){ store(wkey(), wallet); renderWallet(); }
 
 function walletDlg(mode){
-  const st = { mode: mode || "dep", amt:"", card: wallet.card || "", msg:"" };
-  const ov = document.createElement("div"); ov.className = "ov";
-  const d = document.createElement("div"); d.className = "wdlg";
-  ov.appendChild(d);
-  const close = () => { wDraw = null; ov.remove(); };
-  ov.onclick = e => { if(e.target === ov) close(); };
-  const num = () => parseFloat(String(st.amt).replace(/\s/g, "").replace(",", ".")) || 0;
+ const st = { mode: mode || "dep", amt:"", card: wallet.card || "", msg:"" };
+ const ov = document.createElement("div"); ov.className = "ov";
+ const d = document.createElement("div"); d.className = "wdlg";
+ ov.appendChild(d);
+ const close = () => { wDraw = null; ov.remove(); };
+ ov.onclick = e => { if(e.target === ov) close(); };
+ const num = () => parseFloat(String(st.amt).replace(/\s/g, "").replace(",", ".")) || 0;
 
-  function sum(){
-    const dep = st.mode === "dep", a = num();
-    d.querySelector("#wsum").textContent = dep
-      ? "Будет зачислено через 1 минуту: " + fmt(a)
-      : "Вы получите: " + fmt(a) + " (без комиссии)";
-  }
+ function sum(){
+ const dep = st.mode === "dep", a = num();
+ d.querySelector("#wsum").textContent = dep
+ ? "Будет зачислено через 1 минуту: " + fmt(a)
+ : "Вы получите: " + fmt(a) + " (без комиссии)";
+ }
 
-  function draw(){
-    const dep = st.mode === "dep";
-    const quick = [1000, 5000, 10000].map(v => '<button data-q="' + v + '">' + fmt(v) + '</button>').join("") + (dep ? "" : '<button data-q="all">Всё</button>');
-    const hist = wallet.ops.slice(0, 8).map(o => {
-      const isDep = o.type === "dep";
-      const when = new Date(o.t).toLocaleString("ru-RU", { day:"2-digit", month:"2-digit", hour:"2-digit", minute:"2-digit" });
-      if(o.type === "trade"){
-        const cls = o.amt > 0 ? "pos" : o.amt < 0 ? "neg" : "";
-        return '<div class="wrow"><span>Сделка<small>' + esc(o.m) + ' · ' + when + '</small></span><span class="' + cls + '">' + (o.amt > 0 ? "+" : o.amt < 0 ? "−" : "") + fmt(Math.abs(o.amt)) + '<small>' + (o.amt > 0 ? "Выигрыш" : o.amt < 0 ? "Проигрыш" : "Возврат") + '</small></span></div>';
-      }
-      return '<div class="wrow"><span>' + (isDep ? "Пополнение" : "Вывод") + '<small>' + esc(o.m) + ' · ' + when + '</small></span>'
-        + '<span class="' + (isDep ? "pos" : "neg") + '">' + (isDep ? "+" : "−") + fmt(o.amt) + '<small>' + (o.st === "done" ? "Выполнено" : "В обработке…") + '</small></span></div>';
-    }).join("") || '<div class="badge">Операций пока нет</div>';
+ function draw(){
+ const dep = st.mode === "dep";
+ const quick = [1000, 5000, 10000].map(v => '<button data-q="' + v + '">' + fmt(v) + '</button>').join("") + (dep ? "" : '<button data-q="all">Всё</button>');
+ const hist = wallet.ops.slice(0, 8).map(o => {
+ const isDep = o.type === "dep";
+ const when = new Date(o.t).toLocaleString("ru-RU", { day:"2-digit", month:"2-digit", hour:"2-digit", minute:"2-digit" });
+ if(o.type === "trade"){
+ const cls = o.amt > 0 ? "pos" : o.amt < 0 ? "neg" : "";
+ return '<div class="wrow"><span>Сделка<small>' + esc(o.m) + ' · ' + when + '</small></span><span class="' + cls + '">' + (o.amt > 0 ? "+" : o.amt < 0 ? "−" : "") + fmt(Math.abs(o.amt)) + '<small>' + (o.amt > 0 ? "Выигрыш" : o.amt < 0 ? "Проигрыш" : "Возврат") + '</small></span></div>';
+ }
+ return '<div class="wrow"><span>' + (isDep ? "Пополнение" : "Вывод") + '<small>' + esc(o.m) + ' · ' + when + '</small></span>'
+ + '<span class="' + (isDep ? "pos" : "neg") + '">' + (isDep ? "+" : "−") + fmt(o.amt) + '<small>' + (o.st === "done" ? "Выполнено" : "В обработке…") + '</small></span></div>';
+ }).join("") || '<div class="badge">Операций пока нет</div>';
 
-    d.innerHTML =
-      '<div class="wtabs"><button data-mode="dep" class="' + (dep ? "on" : "") + '">Пополнение</button><button data-mode="wd" class="' + (dep ? "" : "on") + '">Вывод</button></div>'
-      + '<div class="wbal">Баланс<b>' + fmt(wallet.bal) + '</b></div>'
-      + '<label for="wamt">Сумма, ₽</label><input id="wamt" inputmode="decimal" placeholder="0" value="' + esc(st.amt) + '">'
-      + '<div class="wq">' + quick + '</div>'
-      + (dep
-        ? '<label>QR-код для пополнения</label><div class="wqr">'
-          + (depositQRImage
-            ? '<img id="depositQRPreview" src="' + esc(depositQRImage) + '" alt="QR-код для пополнения">'
-            : '<div class="wqr-empty">QR-код не настроен владельцем сайта.</div>')
-          + '</div>'
-        : '<label for="wcard">Карта для вывода</label><input id="wcard" inputmode="numeric" autocomplete="off" placeholder="0000 0000 0000 0000" value="' + esc(st.card) + '">')
-      + '<div class="wsum" id="wsum"></div>'
-      + '<div class="werr" id="werr"></div><div class="wok" id="wok">' + esc(st.msg) + '</div>'
-      + '<button class="wgo" id="wgo">' + (dep ? "Пополнить" : "Вывести") + '</button>'
-      + '<button class="wx" id="wx">Закрыть</button>'
-      + '<div class="wnote">Минимум ' + fmt(MIN_SUM) + (dep ? ". Пополнение зачисляется в течение 1 минуты" : ", комиссии нет") + '.</div>'
-      + '<div class="whist">' + hist + '</div>';
+ d.innerHTML =
+ '<div class="wtabs"><button data-mode="dep" class="' + (dep ? "on" : "") + '">Пополнение</button><button data-mode="wd" class="' + (dep ? "" : "on") + '">Вывод</button></div>'
+ + '<div class="wbal">Баланс<b>' + fmt(wallet.bal) + '</b></div>'
+ + '<label for="wamt">Сумма, USDT</label><input id="wamt" inputmode="decimal" placeholder="0" value="' + esc(st.amt) + '">'
+ + '<div class="wq">' + quick + '</div>'
+ + (dep
+ ? '<div class="wnote">Отправьте USDT только через сеть TRC20 (TRON) на адрес ниже. Перед переводом обязательно проверьте сеть.</div><label>Адрес для пополнения USDT (TRC20)</label><div class="wrow"><code id="depositAddress" style="overflow-wrap:anywhere">' + esc(DEPOSIT_ADDRESS) + '</code><button type="button" id="copyDepositAddress">Копировать</button></div>'
+ : '<label for="wcard">USDT-адрес для вывода</label><input id="wcard" autocomplete="off" placeholder="Адрес кошелька USDT" value="' + esc(st.card) + '">')
+ + '<div class="wsum" id="wsum"></div>'
+ + '<div class="werr" id="werr"></div><div class="wok" id="wok">' + esc(st.msg) + '</div>'
+ + '<button class="wgo" id="wgo">' + (dep ? "Пополнить" : "Вывести") + '</button>'
+ + '<button class="wx" id="wx">Закрыть</button>'
+ + '<div class="wnote">Минимум ' + fmt(MIN_SUM) + (dep ? ". Пополнение зачисляется в течение 1 минуты" : ", комиссии нет") + '.</div>'
+ + '<div class="whist">' + hist + '</div>';
 
-    d.querySelectorAll("[data-mode]").forEach(b => b.onclick = () => { st.mode = b.dataset.mode; st.msg = ""; draw(); });
-    d.querySelectorAll("[data-q]").forEach(b => b.onclick = () => {
-      st.amt = b.dataset.q === "all" ? String(wallet.bal) : b.dataset.q;
-      d.querySelector("#wamt").value = st.amt; sum();
-    });
-    d.querySelector("#wamt").oninput = e => { st.amt = e.target.value; st.msg = ""; d.querySelector("#wok").textContent = ""; d.querySelector("#werr").textContent = ""; sum(); };
-    const wc = d.querySelector("#wcard"); if(wc) wc.oninput = e => {
-      const dg = e.target.value.replace(/\D/g, "").slice(0, 16);
-      st.card = dg.replace(/(.{4})/g, "$1 ").trim(); e.target.value = st.card;
-      wallet.card = st.card; store(wkey(), wallet); d.querySelector("#werr").textContent = "";
-    };
-    d.querySelector("#wx").onclick = close;
-    d.querySelector("#wgo").onclick = submit;
-    sum();
-  }
+ d.querySelectorAll("[data-mode]").forEach(b => b.onclick = () => { st.mode = b.dataset.mode; st.msg = ""; draw(); });
+ d.querySelectorAll("[data-q]").forEach(b => b.onclick = () => {
+ st.amt = b.dataset.q === "all" ? String(wallet.bal) : b.dataset.q;
+ d.querySelector("#wamt").value = st.amt; sum();
+ });
+ d.querySelector("#wamt").oninput = e => { st.amt = e.target.value; st.msg = ""; d.querySelector("#wok").textContent = ""; d.querySelector("#werr").textContent = ""; sum(); };
+ const wc = d.querySelector("#wcard"); if(wc) wc.oninput = e => {
+ st.card = e.target.value.trim();
+ wallet.card = st.card; store(wkey(), wallet); d.querySelector("#werr").textContent = "";
+ };
+ const copyAddr = d.querySelector("#copyDepositAddress");
+ if(copyAddr) copyAddr.onclick = async () => {
+ try { await navigator.clipboard.writeText(DEPOSIT_ADDRESS); copyAddr.textContent = "Скопировано"; }
+ catch(e) { copyAddr.textContent = "Скопируйте адрес вручную"; }
+ };
+ d.querySelector("#wx").onclick = close;
+ d.querySelector("#wgo").onclick = submit;
+ sum();
+ }
 
-  function submit(){
-    const dep = st.mode === "dep", a = Math.round(num()*100)/100, err = d.querySelector("#werr");
-    const bad = t => { err.textContent = t; };
-    if(a < MIN_SUM) return bad("Минимальная сумма — " + fmt(MIN_SUM));
-    if(dep && a > MAX_DEP) return bad("Максимум за одно пополнение — " + fmt(MAX_DEP));
-    const digits = dep ? "" : st.card.replace(/\D/g, "");
-    if(!dep && digits.length !== 16) return bad("Укажите номер карты: 16 цифр");
-    if(!dep && a > wallet.bal) return bad("Недостаточно средств на балансе");
-    const op = { t:Date.now(), type:st.mode, amt:a, m:dep ? "Пополнение через QR-код" : "Карта …" + digits.slice(-4), st:"pending" };
-    if(!dep) wallet.bal = Math.round((wallet.bal - a)*100)/100;
-    wallet.ops.unshift(op); wallet.ops = wallet.ops.slice(0, 50);
-    saveWallet();
-    arm(wkey(), op);
-    st.msg = dep ? "Заявка на пополнение создана. Деньги поступят через 1 минуту" : "Заявка на вывод создана";
-    st.amt = "";
-    draw();
-  }
+ function submit(){
+ const dep = st.mode === "dep", a = Math.round(num()*100)/100, err = d.querySelector("#werr");
+ const bad = t => { err.textContent = t; };
+ if(a < MIN_SUM) return bad("Минимальная сумма — " + fmt(MIN_SUM));
+ if(dep && a > MAX_DEP) return bad("Максимум за одно пополнение — " + fmt(MAX_DEP));
+ const address = dep ? "" : st.card.trim();
+ if(!dep && (st.card.trim().length < 10 || st.card.trim().length > 100)) return bad("Укажите корректный USDT-адрес");
+ if(!dep && a > wallet.bal) return bad("Недостаточно средств на балансе");
+ const op = { t:Date.now(), type:st.mode, amt:a, m:dep ? "-пополнение USDT" : "USDT-адрес …" + address.slice(-6), st:"pending" };
+ if(!dep) wallet.bal = Math.round((wallet.bal - a)*100)/100;
+ wallet.ops.unshift(op); wallet.ops = wallet.ops.slice(0, 50);
+ saveWallet();
+ arm(wkey(), op);
+ st.msg = dep ? "-заявка создана. Реальный перевод USDT не выполняется." : "-заявка на вывод создана. Реальный перевод USDT не выполняется.";
+ st.amt = "";
+ draw();
+ }
 
-  wDraw = draw; draw();
-  document.body.appendChild(ov);
+ wDraw = draw; draw();
+ document.body.appendChild(ov);
 }
 document.getElementById("wbtn").onclick = () => walletDlg("dep");
 
 // ===== Лонг / Шорт: сделка на время. Выиграл — возвращается ставка + 7%, проиграл — ставка сгорает, ничья — возврат =====
-const PAYOUT = 0.7, MIN_TRADE = 10;
+const PAYOUT = 0.7, MIN_TRADE = 1;
 const EXPS = [[30,"30 с"],[60,"1 мин"],[300,"5 мин"],[900,"15 мин"],[1800,"30 мин"]];
 const prices = {}, busy = new Set();
 let tExp = 30, tl = [], tmsgT = null;
@@ -567,136 +586,107 @@ const tmsg = (t, ok) => { const e = $("terr"); e.textContent = t; e.className = 
 const dirName = d => d === "long" ? "Лонг" : "Шорт";
 
 function tradeUI(){
-  $("tsym").textContent = nm(sym);
-  const box = $("ttimes"); box.innerHTML = "";
-  EXPS.forEach(x => {
-    const b = document.createElement("button"); b.textContent = x[1]; b.className = x[0] === tExp ? "on" : "";
-    b.onclick = () => { tExp = x[0]; tradeUI(); }; box.appendChild(b);
-  });
-  const a = r2(tAmt());
-  $("tpay").innerHTML = a > 0 ? "Если угадали: вернётся <b>" + fmt(r2(a*(1 + PAYOUT))) + "</b> (+" + fmt(r2(a*PAYOUT)) + ", +" + Math.round(PAYOUT*100) + "%)" : "Доход при выигрыше: +" + Math.round(PAYOUT*100) + "%";
-  tradeTick();
+ $("tsym").textContent = nm(sym);
+ const simNotice = $("ctrlSimNotice");
+ if(simNotice) simNotice.style.display = isCtrl(sym) ? "block" : "none";
+ const box = $("ttimes"); box.innerHTML = "";
+ EXPS.forEach(x => {
+ const b = document.createElement("button"); b.textContent = x[1]; b.className = x[0] === tExp ? "on" : "";
+ b.onclick = () => { tExp = x[0]; tradeUI(); }; box.appendChild(b);
+ });
+ const a = r2(tAmt());
+ $("tpay").innerHTML = a > 0 ? "Если угадали: вернётся <b>" + fmt(r2(a*(1 + PAYOUT))) + "</b> (+" + fmt(r2(a*PAYOUT)) + ", +" + Math.round(PAYOUT*100) + "%)" : "Доход при выигрыше: +" + Math.round(PAYOUT*100) + "%";
+ tradeTick();
 }
 
-// Приховане керування: змінює ціну CTRLUSDT на pct%
-function pump(pct){
-  if(!isCtrl(sym) || !cur.length) return;
-  const key = sym + tf;
-  const bars = demo[key] || cur;
-  const last = bars[bars.length - 1];
-  const step = STEP[tf];
-  const now = Math.floor(Date.now() / 1000 / step) * step;
-  let bar = last;
-  if(now > last.time){
-    bar = { time: now, open: last.close, high: last.close, low: last.close, close: last.close, v: 0 };
-    bars.push(bar);
-    cur = bars.slice();
-  }
-  const factor = 1 + pct / 100;
-  const newClose = Math.max(0.000001, bar.close * factor);
-  bar.close = newClose;
-  bar.high = Math.max(bar.high, newClose);
-  bar.low = Math.min(bar.low, newClose);
-  bar.v += 20 + Math.random() * 40;
-  prices[sym] = newClose;
-  BASE.CTRLUSDT = newClose;
-  candles.update({ time: bar.time, open: bar.open, high: bar.high, low: bar.low, close: newClose });
-  vol.update({ time: bar.time, value: bar.v, color: volColor(bar.open, newClose) });
-  tradeTick();
-}
 function tradeTick(){
-  $("tpx").textContent = pf(prices[sym]);
-  const box = $("topen"), list = (wallet.trades || []);
-  box.innerHTML = list.map(t => {
-    const p = prices[t.sym], left = Math.max(0, Math.ceil((t.exp - Date.now())/1000));
-    const d = p == null ? 0 : (p - t.entry)*(t.dir === "long" ? 1 : -1);
-    const cls = d > 0 ? "pos" : d < 0 ? "neg" : "";
-    const mm = String(Math.floor(left/60)).padStart(2, "0") + ":" + String(left%60).padStart(2, "0");
-    return '<div class="wrow"><span>' + dirName(t.dir) + " " + esc(nm(t.sym)) + '<small>' + fmt(t.stake) + ' · вход ' + pf(t.entry) + '</small></span><span class="' + cls + '">' + mm + '<small>' + (d > 0 ? "+" + fmt(r2(t.stake*PAYOUT)) : d < 0 ? "−" + fmt(t.stake) : "0") + '</small></span></div>';
-  }).join("");
+ $("tpx").textContent = pf(prices[sym]);
+ const box = $("topen"), list = (wallet.trades || []);
+ box.innerHTML = list.map(t => {
+ const p = prices[t.sym], left = Math.max(0, Math.ceil((t.exp - Date.now())/1000));
+ const d = p == null ? 0 : (p - t.entry)*(t.dir === "long" ? 1 : -1);
+ const cls = d > 0 ? "pos" : d < 0 ? "neg" : "";
+ const mm = String(Math.floor(left/60)).padStart(2, "0") + ":" + String(left%60).padStart(2, "0");
+ return '<div class="wrow"><span>' + dirName(t.dir) + " " + esc(nm(t.sym)) + '<small>' + fmt(t.stake) + ' · вход ' + pf(t.entry) + '</small></span><span class="' + cls + '">' + mm + '<small>' + (d > 0 ? "+" + fmt(r2(t.stake*PAYOUT)) : d < 0 ? "−" + fmt(t.stake) : "0") + '</small></span></div>';
+ }).join("");
 }
 function lines(){
-  tl.forEach(l => { try{ candles.removePriceLine(l); }catch(e){} }); tl = [];
-  (wallet.trades || []).filter(t => t.sym === sym).forEach(t => tl.push(candles.createPriceLine({
-    price:t.entry, color:t.dir === "long" ? css("--up") : css("--down"), lineWidth:1, lineStyle:2, axisLabelVisible:true, title:dirName(t.dir) + " " + t.stake
-  })));
+ tl.forEach(l => { try{ candles.removePriceLine(l); }catch(e){} }); tl = [];
+ (wallet.trades || []).filter(t => t.sym === sym).forEach(t => tl.push(candles.createPriceLine({
+ price:t.entry, color:t.dir === "long" ? css("--up") : css("--down"), lineWidth:1, lineStyle:2, axisLabelVisible:true, title:dirName(t.dir) + " " + t.stake
+ })));
 }
 function openTrade(dir){
-  const a = r2(tAmt()), p = prices[sym];
-  if(p == null) return tmsg("Нет цены — подождите загрузки графика");
-  if(a < MIN_TRADE) return tmsg("Минимальная ставка — " + fmt(MIN_TRADE));
-  if(a > wallet.bal) return tmsg("Недостаточно средств — пополните кошелёк");
-  wallet.bal = r2(wallet.bal - a);
-  wallet.trades = wallet.trades || [];
-  wallet.trades.push({ id:Date.now() + "-" + Math.random().toString(36).slice(2, 7), sym, dir, stake:a, entry:p, t:Date.now(), exp:Date.now() + tExp*1000 });
-  saveWallet(); if(wDraw) wDraw(); lines(); tradeTick();
-  tmsg(dirName(dir) + " " + fmt(a) + " открыт, вход " + pf(p), true);
+ const a = r2(tAmt()), p = prices[sym];
+ if(p == null) return tmsg("Нет цены — подождите загрузки графика");
+ if(a < MIN_TRADE) return tmsg("Минимальная ставка — " + fmt(MIN_TRADE));
+ if(a > wallet.bal) return tmsg("Недостаточно средств — пополните кошелёк");
+ if(isCtrl(sym) && (wallet.trades || []).some(t => t.sym === "CTRLUSDT")){
+ return tmsg("На CTRL можно открыть только одну DEMO-сделку одновременно");
+ }
+ wallet.bal = r2(wallet.bal - a);
+ wallet.trades = wallet.trades || [];
+ wallet.trades.push({ id:Date.now() + "-" + Math.random().toString(36).slice(2, 7), sym, dir, stake:a, entry:p, t:Date.now(), exp:Date.now() + tExp*1000 });
+ saveWallet(); if(wDraw) wDraw(); lines(); tradeTick();
+ tmsg(dirName(dir) + " " + fmt(a) + " открыт, вход " + pf(p), true);
 }
 // Цена на момент экспирации: для «свежих» сделок — текущая, для давно истёкших (страница была закрыта) — по минутной свече.
 async function settlePrice(t){
-  if(isCtrl(t.sym)) return prices[t.sym] != null ? prices[t.sym] : null;
-  const base = isFut(t.sym) ? "https://fapi.binance.com/fapi/v1/" : "https://api.binance.com/api/v3/";
-  try{
-    if(Date.now() - t.exp > 4000){
-      const d = await fetch(base + "klines?symbol=" + t.sym + "&interval=1m&startTime=" + Math.floor(t.exp/60000)*60000 + "&limit=1").then(r => r.json());
-      if(Array.isArray(d) && d.length) return +d[0][4];
-    }
-    const d = await fetch(base + "ticker/price?symbol=" + t.sym).then(r => r.json());
-    if(d && d.price) return +d.price;
-  }catch(e){}
-  return prices[t.sym] != null ? prices[t.sym] : null;
+ if(isCtrl(t.sym)){
+   // Контрольований позитивний результат у позначеному режимі симуляції.
+   const minMove = 0.00008;
+   return t.entry * (t.dir === "long" ? (1 + minMove) : (1 - minMove));
+ }
+ const base = isFut(t.sym) ? "https://fapi.binance.com/fapi/v1/" : "https://api.binance.com/api/v3/";
+ try{
+ if(Date.now() - t.exp > 4000){
+ const d = await fetch(base + "klines?symbol=" + t.sym + "&interval=1m&startTime=" + Math.floor(t.exp/60000)*60000 + "&limit=1").then(r => r.json());
+ if(Array.isArray(d) && d.length) return +d[0][4];
+ }
+ const d = await fetch(base + "ticker/price?symbol=" + t.sym).then(r => r.json());
+ if(d && d.price) return +d.price;
+ }catch(e){}
+ return prices[t.sym] != null ? prices[t.sym] : null;
 }
 async function closeTrade(t){
-  busy.add(t.id);
-  const p = await settlePrice(t);
-  const c = (wallet.trades || []).find(x => x.id === t.id);
-  if(!c){ busy.delete(t.id); return; }
-  if(p == null){ setTimeout(() => busy.delete(t.id), 3000); return; }
-  const diff = (p - c.entry)*(c.dir === "long" ? 1 : -1);
-  let back = 0, net = -c.stake;
-  if(diff > 0){ back = r2(c.stake*(1 + PAYOUT)); net = r2(back - c.stake); }
-  else if(diff === 0){ back = c.stake; net = 0; }
-  wallet.bal = r2(wallet.bal + back);
-  wallet.trades = wallet.trades.filter(x => x.id !== c.id);
-  wallet.ops.unshift({ t:Date.now(), type:"trade", amt:net, m:dirName(c.dir) + " " + nm(c.sym) + " · " + pf(c.entry) + " → " + pf(p), st:"done" });
-  wallet.ops = wallet.ops.slice(0, 50);
-  busy.delete(c.id);
-  saveWallet(); if(wDraw) wDraw(); lines(); tradeTick();
-  tmsg(net > 0 ? "Выигрыш +" + fmt(net) + " (вернулось " + fmt(back) + ")" : net < 0 ? "Проигрыш −" + fmt(c.stake) : "Цена не изменилась — ставка возвращена", net >= 0);
+ busy.add(t.id);
+ const p = await settlePrice(t);
+ const c = (wallet.trades || []).find(x => x.id === t.id);
+ if(!c){ busy.delete(t.id); return; }
+ if(p == null){ setTimeout(() => busy.delete(t.id), 3000); return; }
+ const diff = (p - c.entry)*(c.dir === "long" ? 1 : -1);
+ let back = 0, net = -c.stake;
+ if(diff > 0){ back = r2(c.stake*(1 + PAYOUT)); net = r2(back - c.stake); }
+ else if(diff === 0){ back = c.stake; net = 0; }
+ wallet.bal = r2(wallet.bal + back);
+ wallet.trades = wallet.trades.filter(x => x.id !== c.id);
+ wallet.ops.unshift({ t:Date.now(), type:"trade", amt:net, m:dirName(c.dir) + " " + nm(c.sym) + " · " + pf(c.entry) + " → " + pf(p), st:"done" });
+ wallet.ops = wallet.ops.slice(0, 50);
+ busy.delete(c.id);
+ saveWallet(); if(wDraw) wDraw(); lines(); tradeTick();
+ tmsg(net > 0 ? "Выигрыш +" + fmt(net) + " (вернулось " + fmt(back) + ")" : net < 0 ? "Проигрыш −" + fmt(c.stake) : "Цена не изменилась — ставка возвращена", net >= 0);
 }
 $("tlong").onclick = () => openTrade("long");
 $("tshort").onclick = () => openTrade("short");
 $("tamt").oninput = tradeUI;
 document.querySelectorAll("[data-ta]").forEach(b => b.onclick = () => { $("tamt").value = b.dataset.ta === "all" ? String(wallet.bal) : b.dataset.ta; tradeUI(); });
-// Приховане керування ціною CTRL: стрілки ↑/↓ або +/− (Shift = трохи сильніше)
-document.addEventListener("keydown", e => {
-  if(!isCtrl(sym)) return;
-  const tag = (e.target && e.target.tagName || "").toLowerCase();
-  if(tag === "input" || tag === "textarea" || tag === "select") return;
-  let pct = 0;
-  if(e.key === "ArrowUp" || e.key === "+" || e.key === "=") pct = e.shiftKey ? 0.8 : 0.25;
-  else if(e.key === "ArrowDown" || e.key === "-" || e.key === "_") pct = e.shiftKey ? -0.8 : -0.25;
-  else return;
-  e.preventDefault();
-  pump(pct);
-});
 setInterval(() => {
-  (wallet.trades || []).forEach(t => { if(t.exp <= Date.now() && !busy.has(t.id)) closeTrade(t); });
-  tradeTick();
+ (wallet.trades || []).forEach(t => { if(t.exp <= Date.now() && !busy.has(t.id)) closeTrade(t); });
+ tradeTick();
 }, 500);
 
 async function filterSymbols(){
-  try{
-    const [f, sp] = await Promise.all([
-      fetch("https://fapi.binance.com/fapi/v1/exchangeInfo").then(r => r.json()),
-      fetch("https://api.binance.com/api/v3/exchangeInfo?permissions=SPOT").then(r => r.json()).catch(() => null)
-    ]);
-    const fut = new Set(f.symbols.filter(x => x.status === "TRADING").map(x => x.symbol));
-    const spot = sp && sp.symbols ? new Set(sp.symbols.filter(x => x.status === "TRADING").map(x => x.symbol)) : null;
-    STOCKS = STOCKS.filter(x => fut.has(x));
-    CRYPTO = CRYPTO.filter(x => isCtrl(x) || (spot ? spot.has(x) : true));
-    SYMS = CRYPTO.concat(STOCKS);
-  }catch(e){}
+ try{
+ const [f, sp] = await Promise.all([
+ fetch("https://fapi.binance.com/fapi/v1/exchangeInfo").then(r => r.json()),
+ fetch("https://api.binance.com/api/v3/exchangeInfo?permissions=SPOT").then(r => r.json()).catch(() => null)
+ ]);
+ const fut = new Set(f.symbols.filter(x => x.status === "TRADING").map(x => x.symbol));
+ const spot = sp && sp.symbols ? new Set(sp.symbols.filter(x => x.status === "TRADING").map(x => x.symbol)) : null;
+ STOCKS = STOCKS.filter(x => fut.has(x));
+ CRYPTO = CRYPTO.filter(x => isCtrl(x) || (spot ? spot.has(x) : true));
+ SYMS = CRYPTO.concat(STOCKS);
+ }catch(e){}
 }
 renderAuth(); loadWallet();
 filterSymbols().finally(() => { render(); load(); });
